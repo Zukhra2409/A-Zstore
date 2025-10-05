@@ -12,6 +12,8 @@
     transition: .2s linear;
 }
 
+
+
 html{
     font-size: 62.5%;
     scroll-behavior: smooth;
@@ -111,16 +113,22 @@ header .fa-bars{
     display: none;
 }
 
-.home-container{
-    background:url(../images/wp.jpg) no-repeat;
-    background-size: cover;
-    background-position: center;
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 90vh;
+  overflow: hidden; 
 }
 
-.home{
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
+.home-container {
+  background: url(../images/wp.jpg) no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /
+  overflow: hidden;
+}
+#gallery {
+  margin-top: -5px; 
 }
 
 .home .content{
@@ -168,7 +176,7 @@ header .fa-bars{
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 одинаковые колонки */
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
@@ -470,7 +478,6 @@ header .fa-bars{
     font-size: 2rem;
     color:#333;
     border-top: .1rem solid rgba(0,0,0,.1);
-    /* padding-bottom: 8rem; */
 }
 
 .footer .credit span{
@@ -478,20 +485,6 @@ header .fa-bars{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* media queries  */
 @media (max-width:991px){
     
     html{
@@ -558,4 +551,190 @@ header .fa-bars{
         font-size: 3rem;
     }
 
+}
+.products .box-container .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-btn {
+  display: block;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: #e84393;
+  color: #fff;
+  font-size: 1.1rem;
+  text-decoration: none;
+}
+
+.form-btn:hover {
+  background: #333;
+}
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 50px auto;
+  flex-wrap: wrap; 
+}
+
+.card {
+  flex: 1 1 22%;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: .5rem;
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  font-size: 1.4rem;
+  color: #666;
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin: 50px auto;
+  flex-wrap: wrap; 
+}
+
+.card {
+  flex: 1 1 23%; 
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .card {
+    width: 48%; 
+  }
+}
+
+@media (max-width: 768px) {
+  .card-row { 
+    display: block; 
+  }
+  .card {
+    width: 100%; 
+    margin-bottom: 10px;
+  }
+}
+/* Base font size */
+html {
+  font-size: 62.5%; /* 1rem = 10px */
+}
+
+body {
+  font-size: 1.4rem; /* 14px on mobile */
+}
+
+/* Medium font size for tablets */
+@media (min-width: 768px) {
+  body {
+    font-size: 1.6rem; /* 16px */
+  }
+}
+
+/* Larger font size for desktops */
+@media (min-width: 1024px) {
+  body {
+    font-size: 1.8rem; /* 18px */
+  }
+}
+
+h1 {
+  font-size: 2em; /* 2rem = 20px for mobile */
+}
+
+/* Adjust heading size for tablets */
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5em; /* 2.5rem = 25px for tablet */
+  }
+}
+
+/* Adjust heading size for desktops */
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3em; /* 3rem = 30px for desktop */
+  }
+}
+.navbar-nav .nav-link {
+  font-size: 1.6rem;
+  color: #333 !important;
+  margin-right: 1.5rem;
+  transition: color .2s;
+}
+.navbar-nav .nav-link:hover {
+  color: #e84393 !important;
+}
+
+/* 💐 Финальная правка для карусели */
+#gallery {
+  background: #fdeef5; /* мягкий розовый, как у Gift Shop */
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
+}
+
+#gallery .carousel {
+  width: 70%;            /* 💗 было 80% — теперь чуть меньше */
+  max-width: 900px;      /* 💗 было 1000px — тоже слегка меньше */
+  border-radius: 1rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+#gallery .carousel-inner {
+  width: 100%;
+  height: auto;
+}
+
+#gallery .carousel-inner img {
+  width: 100%;            /* 💗 было 100% — теперь картинка чуть меньше контейнера */
+  height: auto;
+  display: block;
+  margin: 0 auto;        /* 💗 центрируем картинку */
+  object-fit: contain;
+  background-color: #fff;
+  border-radius: 0.5rem; /* 💗 лёгкое скругление для мягкости */
 }

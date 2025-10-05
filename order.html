@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оформление заказа — A&Z Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background: #fff5f9;
+      font-size: 1.6rem;
+    }
+
+    .order-container {
+      max-width: 700px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #e84393;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    label {
+      font-size: 1.6rem;
+      margin-bottom: .5rem;
+      color: #333;
+    }
+
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="date"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      width: auto;
+      height: auto;
+      margin-right: 8px;
+      vertical-align: middle;
+      accent-color: #e84393;
+    }
+
+
+    button {
+      background: #e84393;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.6rem;
+      border-radius: 8px;
+      width: 100%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+
+
+  <nav class="navbar navbar-expand-lg bg-white shadow sticky-top border-bottom" style="padding:10px 0;">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html" style="color:#e84393; font-size:2rem;">A&Zstore<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
+        <li class="nav-item"><a class="nav-link" href="register.html">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ 
+  <div class="order-container">
+    <h2>Ваш заказ</h2>
+
+    <form>
+
+      <label>Ваше имя</label>
+      <input type="text" placeholder="Напишите ваше имя" required>
+
+      <label>Ваш телефон</label>
+      <input type="tel" placeholder="+7 (000) 000-00-00" required>
+
+      <label>Имя получателя</label>
+      <input type="text" placeholder="Напишите имя получателя" required>
+
+      <label>Телефон получателя</label>
+      <input type="tel" placeholder="+7 (000) 000-00-00" required>
+
+      <label>Укажите город доставки цветов:</label>
+      <select required>
+        <option>Астана</option>
+        <option>Алматы</option>
+        <option>Шымкент</option>
+        <option>Другой город</option>
+      </select>
+
+      <label>Адрес доставки</label>
+      <input type="text" placeholder="Напишите адрес, подъезд, квартиру" required>
+
+      <label>Дата доставки</label>
+      <input type="date" id="date" required>
+
+      <label>Текст открытки или комментарий к заказу</label>
+      <textarea rows="4" placeholder="Напишите сюда пожелания или комментарий"></textarea>
+
+   
+      <label class="form-label">Выберите условия доставки</label>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="delivery" id="deliveryCourier" value="courier" checked>
+        <label class="form-check-label" for="deliveryCourier">
+          Доставка курьером
+        </label>
+      </div>
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="radio" name="delivery" id="deliveryPickup" value="pickup">
+        <label class="form-check-label" for="deliveryPickup">
+          Самовывоз
+        </label>
+      </div>
+
+      <label class="form-label">Способ оплаты</label>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="payment" id="payManager" value="manager" checked>
+        <label class="form-check-label" for="payManager">
+          Оплата через менеджера (Visa, MasterCard, PayPal и др.)
+        </label>
+      </div>
+      <div class="form-check mb-4">
+        <input class="form-check-input" type="radio" name="payment" id="payKaspi" value="kaspi">
+        <label class="form-check-label" for="payKaspi">
+          Оплата через Kaspi.kz
+        </label>
+      </div>
+
+      <button type="submit">Оформить заказ</button>
+
+    </form>
+  </div>
+
+
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">Created by <b>Zukhra & Akniyet</b> | SE-2409 | A&Z Store</p>
+  </footer>
+
+  <script>
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').setAttribute('min', today);
+  </script>
+
+</body>
+</html>

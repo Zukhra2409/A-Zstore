@@ -107,14 +107,12 @@
       <button id="registerBtn">Register</button>
     </div>
 
-    <!-- Login Form -->
     <form class="form active" id="loginForm">
       <input type="text" id="loginUser" placeholder="Username" required>
       <input type="password" id="loginPass" placeholder="Password" required>
       <button type="submit">Login</button>
     </form>
 
-    <!-- Register Form -->
     <form class="form" id="registerForm">
       <input type="text" id="regUser" placeholder="Username" required>
       <small class="error"></small>
@@ -134,7 +132,6 @@
   </div>
 
   <script>
-    // --- переключение вкладок ---
     const loginBtn = document.getElementById('loginBtn');
     const registerBtn = document.getElementById('registerBtn');
     const loginForm = document.getElementById('loginForm');
@@ -154,7 +151,7 @@
       loginBtn.classList.remove('active');
     });
 
-    // --- валидация формы регистрации ---
+   
     const regEmail = document.getElementById('regEmail');
     const regPass = document.getElementById('regPass');
     const regConfirm = document.getElementById('regConfirm');
@@ -174,7 +171,7 @@
 
       let valid = true;
 
-      // EMAIL
+  
       const emailVal = regEmail.value.trim();
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
       if (!emailValid) {
@@ -182,20 +179,19 @@
         valid = false;
       } else showError(regEmail, '');
 
-      // PASSWORD LENGTH
+     
       const passVal = regPass.value.trim();
       if (passVal.length < 6) {
         showError(regPass, 'Password must be at least 6 characters');
         valid = false;
       } else showError(regPass, '');
 
-      // CONFIRM PASSWORD
       if (regConfirm.value.trim() !== passVal || regConfirm.value === '') {
         showError(regConfirm, 'Passwords do not match');
         valid = false;
       } else showError(regConfirm, '');
 
-      // USERNAME
+
       const userVal = document.getElementById('regUser').value.trim();
       const userInput = document.getElementById('regUser');
       if (userVal === '') {

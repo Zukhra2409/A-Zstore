@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login & Register</title>
-  <link rel="stylesheet" href="css/style.css">
   <style>
     body {
       margin: 0;
@@ -52,7 +51,7 @@
     .form {
       display: none; 
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.5rem;
     }
 
     .form.active {
@@ -60,7 +59,7 @@
     }
 
     .form input {
-      padding: 1rem;
+      padding: 0.8rem;
       border: 1px solid #ccc;
       border-radius: 0.5rem;
       font-size: 1rem;
@@ -74,10 +73,29 @@
       color: #fff;
       font-size: 1.1rem;
       cursor: pointer;
+      margin-top: 0.5rem;
     }
 
     .form button:hover {
       background: #333;
+    }
+
+    .error {
+      color: #e63946;
+      font-size: 0.85rem;
+      min-height: 1em;
+    }
+
+    .success {
+      color: #2a9d8f;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    input.invalid {
+      border-color: #e63946;
+      box-shadow: 0 0 4px rgba(230,57,70,0.3);
     }
   </style>
 </head>
@@ -89,38 +107,107 @@
       <button id="registerBtn">Register</button>
     </div>
 
+    <!-- Login Form -->
     <form class="form active" id="loginForm">
-  <input type="text" placeholder="Username" required>
-  <input type="password" placeholder="Password" required>
-  <a href="index.html" class="form-btn">Login</a>
-</form>
+      <input type="text" id="loginUser" placeholder="Username" required>
+      <input type="password" id="loginPass" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
 
-   <form class="form" id="registerForm">
-  <input type="text" placeholder="Username" required>
-  <input type="email" placeholder="Email" required>
-  <input type="password" placeholder="Password" required>
-  <a href="index.html" class="form-btn">Register</a>
-</form>
+    <!-- Register Form -->
+    <form class="form" id="registerForm">
+      <input type="text" id="regUser" placeholder="Username" required>
+      <small class="error"></small>
+
+      <input type="email" id="regEmail" placeholder="Email" required>
+      <small class="error"></small>
+
+      <input type="password" id="regPass" placeholder="Password" required>
+      <small class="error"></small>
+
+      <input type="password" id="regConfirm" placeholder="Confirm Password" required>
+      <small class="error"></small>
+
+      <button type="submit">Register</button>
+      <p id="successMsg" class="success" hidden>Registration successful!</p>
+    </form>
   </div>
 
   <script>
-    const loginBtn = document.getElementById("loginBtn");
-    const registerBtn = document.getElementById("registerBtn");
-    const loginForm = document.getElementById("loginForm");
-    const registerForm = document.getElementById("registerForm");
+    // --- переключение вкладок ---
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
 
-    loginBtn.addEventListener("click", () => {
-      loginForm.classList.add("active");
-      registerForm.classList.remove("active");
-      loginBtn.classList.add("active");
-      registerBtn.classList.remove("active");
+    loginBtn.addEventListener('click', () => {
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+      loginBtn.classList.add('active');
+      registerBtn.classList.remove('active');
     });
 
-    registerBtn.addEventListener("click", () => {
-      registerForm.classList.add("active");
-      loginForm.classList.remove("active");
-      registerBtn.classList.add("active");
-      loginBtn.classList.remove("active");
+    registerBtn.addEventListener('click', () => {
+      registerForm.classList.add('active');
+      loginForm.classList.remove('active');
+      registerBtn.classList.add('active');
+      loginBtn.classList.remove('active');
+    });
+
+    // --- валидация формы регистрации ---
+    const regEmail = document.getElementById('regEmail');
+    const regPass = document.getElementById('regPass');
+    const regConfirm = document.getElementById('regConfirm');
+    const regForm = document.getElementById('registerForm');
+    const successMsg = document.getElementById('successMsg');
+
+    function showError(input, message) {
+      const small = input.nextElementSibling;
+      small.textContent = message;
+      if (message) input.classList.add('invalid');
+      else input.classList.remove('invalid');
+    }
+
+    regForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      successMsg.hidden = true;
+
+      let valid = true;
+
+      // EMAIL
+      const emailVal = regEmail.value.trim();
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
+      if (!emailValid) {
+        showError(regEmail, 'Enter a valid email address');
+        valid = false;
+      } else showError(regEmail, '');
+
+      // PASSWORD LENGTH
+      const passVal = regPass.value.trim();
+      if (passVal.length < 6) {
+        showError(regPass, 'Password must be at least 6 characters');
+        valid = false;
+      } else showError(regPass, '');
+
+      // CONFIRM PASSWORD
+      if (regConfirm.value.trim() !== passVal || regConfirm.value === '') {
+        showError(regConfirm, 'Passwords do not match');
+        valid = false;
+      } else showError(regConfirm, '');
+
+      // USERNAME
+      const userVal = document.getElementById('regUser').value.trim();
+      const userInput = document.getElementById('regUser');
+      if (userVal === '') {
+        showError(userInput, 'Username is required');
+        valid = false;
+      } else showError(userInput, '');
+
+      // Если всё ок
+      if (valid) {
+        regForm.reset();
+        successMsg.hidden = false;
+      }
     });
   </script>
 

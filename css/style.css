@@ -122,7 +122,7 @@ header .fa-bars{
 }
 
 .home-container {
-  background: url(../images/wp.jpg) no-repeat center center;
+  background: url(images/wp.jpg) no-repeat center center;
   background-size: cover;
   background-attachment: fixed; 
   overflow: hidden;
@@ -240,28 +240,27 @@ header .fa-bars{
     color:#555;
     font-size: 1.3rem;
 }
-
 .products .box-container{
     display: flex;
     flex-wrap: wrap;
-    gap:1.5rem;
+    gap: 1.5rem;
 }
 
 .products .box-container .box{
-    flex:1 1 30rem;
+    flex: 1 1 30rem;
     box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
     border-radius: .5rem;
-    border:.1rem solid rgba(0,0,0,.1);
-    position: relative;    
+    border: .1rem solid rgba(0,0,0,.1);
+    position: relative;
+    background-color: white; /* Ensures the box background stays white */
 }
-
 .products .box-container .box .discount{
     position: absolute;
-    top:1rem; left:1rem;
-    padding:.7rem 1rem;
+    top: 1rem; left: 1rem;
+    padding: .7rem 1rem;
     font-size: 2rem;
-    color:var(--pink);
-    background:rgba(255, 51, 153,.05);
+    color: var(--pink);
+    background: rgba(255, 51, 153, .05);
     z-index: 1;
     border-radius: .5rem;
 }
@@ -270,11 +269,11 @@ header .fa-bars{
     position: relative;
     text-align: center;
     padding-top: 2rem;
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .products .box-container .box .image img{
-    height:25rem;
+    height: 25rem;
 }
 
 .products .box-container .box:hover .image img{
@@ -283,56 +282,57 @@ header .fa-bars{
 
 .products .box-container .box .image .icons{
     position: absolute;
-    bottom:-7rem; left:0; right:0;
+    bottom: -7rem; left: 0; right: 0;
     display: flex;
 }
 
 .products .box-container .box:hover .image .icons{
-    bottom:0;
+    bottom: 0;
 }
 
 .products .box-container .box .image .icons a{
     height: 5rem;
     line-height: 5rem;
     font-size: 2rem;
-    width:50%;
-    background:var(--pink);
-    color:#fff;
+    width: 50%;
+    background: var(--pink);
+    color: #fff;
 }
 
 .products .box-container .box .image .icons .cart-btn{
     border-left: .1rem solid #fff7;
     border-right: .1rem solid #fff7;
-    width:100%;
+    width: 100%;
 }
 
 .products .box-container .box .image .icons a:hover{
-    background:#333;
+    background: #333;
 }
 
 .products .box-container .box .content{
-    padding:2rem;
+    padding: 2rem;
     text-align: center;
 }
 
 .products .box-container .box .content h3{
     font-size: 2.5rem;
-    color:#333;
+    color: #333;
 }
 
 .products .box-container .box .content .price{
     font-size: 2.5rem;
-    color:var(--pink);
+    color: var(--pink);
     font-weight: bolder;
     padding-top: 1rem;
 }
 
 .products .box-container .box .content .price span{
     font-size: 1.5rem;
-    color:#999;
+    color: #999;
     font-weight: lighter;
     text-decoration: line-through;
 }
+
 
 .review .box-container{
     display: flex;
@@ -469,7 +469,6 @@ header .fa-bars{
 .footer .box-container .box  img{
     margin-top: 1rem;
 }
-
 .footer .credit{
     text-align: center;
     padding:1.5rem;
@@ -658,44 +657,44 @@ header .fa-bars{
     margin-bottom: 10px;
   }
 }
-
+/* Base font size */
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; /* 1rem = 10px */
 }
 
 body {
-  font-size: 1.4rem; 
+  font-size: 1.4rem; /* 14px on mobile */
 }
 
-
+/* Medium font size for tablets */
 @media (min-width: 768px) {
   body {
-    font-size: 1.6rem;
+    font-size: 1.6rem; /* 16px */
   }
 }
 
-
+/* Larger font size for desktops */
 @media (min-width: 1024px) {
   body {
-    font-size: 1.8rem; 
+    font-size: 1.8rem; /* 18px */
   }
 }
 
 h1 {
-  font-size: 2em; 
+  font-size: 2em; /* 2rem = 20px for mobile */
 }
 
-
+/* Adjust heading size for tablets */
 @media (min-width: 768px) {
   h1 {
-    font-size: 2.5em;
+    font-size: 2.5em; /* 2.5rem = 25px for tablet */
   }
 }
 
-
+/* Adjust heading size for desktops */
 @media (min-width: 1024px) {
   h1 {
-    font-size: 3em;
+    font-size: 3em; /* 3rem = 30px for desktop */
   }
 }
 .navbar-nav .nav-link {
@@ -707,18 +706,17 @@ h1 {
 .navbar-nav .nav-link:hover {
   color: #e84393 !important;
 }
-
-
+/* 💐 Финальная правка для карусели */
 #gallery {
-  background: #fdeef5; 
+  background: #fdeef5; /* мягкий розовый, как у Gift Shop */
   padding: 60px 0;
   display: flex;
   justify-content: center;
 }
 
 #gallery .carousel {
-  width: 70%;           
-  max-width: 900px;      
+  width: 70%;            /* 💗 было 80% — теперь чуть меньше */
+  max-width: 900px;      /* 💗 было 1000px — тоже слегка меньше */
   border-radius: 1rem;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   overflow: hidden;
@@ -730,13 +728,13 @@ h1 {
 }
 
 #gallery .carousel-inner img {
-  width: 100%;            
+  width: 100%;            /* 💗 было 100% — теперь картинка чуть меньше контейнера */
   height: auto;
   display: block;
-  margin: 0 auto;        
+  margin: 0 auto;        /* 💗 центрируем картинку */
   object-fit: contain;
   background-color: #fff;
-  border-radius: 0.5rem; 
+  border-radius: 0.5rem; /* 💗 лёгкое скругление для мягкости */
 }
 .form-box {
   background: white;

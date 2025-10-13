@@ -15,10 +15,15 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-white shadow sticky-top border-bottom" style="padding:10px 0;">
   <div class="container">
-    <a class="navbar-brand fw-bold" href="#" style="color:#e84393; font-size:2rem;">A&Zstore<span>.</span></a>
+    <a class="navbar-brand fw-bold" href="#" style="color:#e84393; font-size:2rem;">
+      A&Zstore<span>.</span>
+    </a>
+
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>
     </button>
+    
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
@@ -98,15 +103,31 @@
       <img src="images/gorsh.jpg" class="img-fluid rounded shadow" alt="Flower pot">
     </div>
 
+<div class="col-lg-6 d-flex flex-column justify-content-center">
+  <h3 class="text-pink">Beautiful Flower Pot</h3>
+  <p>Our flower pots bring happiness and beauty to your home. Each bouquet is arranged with love and care.</p>
+  <!-- Added onclick attribute to trigger the JavaScript function -->
+  <button class="btn btn-dark btn-lg mt-3" onclick="toggleBackgroundColor()">Add to Cart</button>
+</div>
 
-    <div class="col-lg-6 d-flex flex-column justify-content-center">
-      <h3 class="text-pink">Beautiful Flower Pot</h3>
-      <p>Our flower pots bring happiness and beauty to your home. Each bouquet is arranged with love and care.</p>
-      <button class="btn btn-dark btn-lg mt-3">Add to Cart</button>
-    </div>
 
-  </div>
-</section>
+<!-- JavaScript code to toggle the background color -->
+<script>
+  let isPink = false; // Initial state is not pink
+
+  function toggleBackgroundColor() {
+    // If the background is currently pink, change it to white
+    if (isPink) {
+      document.body.style.backgroundColor = 'white';
+    } else {
+      // Otherwise, set the background to pink
+      document.body.style.backgroundColor = '#FFD8F0'; // Bright pink
+    }
+
+    // Toggle the state for the next click
+    isPink = !isPink;
+  }
+</script>
 
 <section class="container my-5">
   <h1 class="heading"><span>Our Categories</span></h1>
@@ -813,42 +834,140 @@
 
 </section>
 
-
-
 <section class="contact" id="contact">
-
     <h1 class="heading"> <span> contact </span> us </h1>
 
     <div class="row">
+        <form id="contactForm" class="p-4 bg-light rounded shadow-sm">
+            <div class="mb-3">
+                <input type="text" id="name" class="form-control" placeholder="Your Name">
+            </div>
 
+            <div class="mb-3">
+                <input type="email" id="email" class="form-control" placeholder="Email">
+            </div>
 
-<form class="p-4 bg-light rounded shadow-sm">
-  <div class="mb-3">
-    <input type="text" class="form-control" placeholder="Your Name">
-  </div>
+            <div class="mb-3">
+                <!-- Phone number input with the correct placeholder and formatting -->
+                <input type="tel" id="phone" class="form-control" placeholder="+7(999)999-99-99" required>
+                <small id="phoneError" class="form-text text-danger" style="display: none;">Please enter a valid phone number in the format: +7(999)999-99-99</small>
+            </div>
 
-  <div class="mb-3">
-    <input type="email" class="form-control" placeholder="Email">
-  </div>
+            <div class="mb-3">
+                <textarea id="message" class="form-control" rows="4" placeholder="Your Message"></textarea>
+            </div>
 
-  <div class="mb-3">
-    <input type="number" class="form-control" placeholder="Phone Number">
-  </div>
-
-  <div class="mb-3">
-    <textarea class="form-control" rows="4" placeholder="Your Message"></textarea>
-  </div>
-
-  <button type="submit" class="btn btn-danger w-100">Send Message</button>
-</form>
+            <button type="submit" class="btn btn-danger w-100">Send Message</button>
+        </form>
 
         <div class="image">
             <img src="images/contact-img.svg" alt="">
         </div>
-
     </div>
-
 </section>
+
+<!-- JavaScript for Form Validation and Phone Formatting -->
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();  // Prevent form submission to handle validation
+
+      // Clear any previous error messages
+      let errorMessages = document.querySelectorAll('.error');
+      errorMessages.forEach(message => message.remove());
+
+      // Get form field values
+      let name = document.getElementById('name').value;
+      let email = document.getElementById('email').value;
+      let phone = document.getElementById('phone').value;
+      let message = document.getElementById('message').value;
+
+      let isValid = true;
+
+      // Validate Name (only letters and spaces allowed)
+      let namePattern = /^[A-Za-z\s]+$/; // Regex for letters and spaces only
+      if (name.trim() === "" || !namePattern.test(name)) {
+          isValid = false;
+          showError('name', 'Please enter a valid name (letters only, no numbers).');
+      }
+
+      // Validate Email (must be in correct email format)
+      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!emailPattern.test(email)) {
+          isValid = false;
+          showError('email', 'Please enter a valid email.');
+      }
+
+      // Validate Phone (must match the regex pattern for phone number)
+      let phonePattern = /^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/;
+      if (!phonePattern.test(phone)) {
+          isValid = false;
+          document.getElementById('phoneError').style.display = 'inline'; // Show error for invalid phone number
+      } else {
+          document.getElementById('phoneError').style.display = 'none'; // Hide error if valid
+      }
+
+      // Validate Message (cannot be empty)
+      if (message.trim() === "") {
+          isValid = false;
+          showError('message', 'Message is required.');
+      }
+
+      // If all fields are valid, submit the form (or process the form data as needed)
+      if (isValid) {
+          alert('Form submitted successfully!');
+          // You can submit the form here if needed: this.submit();
+      } else {
+          // Display a general error message if any required field is missing
+          alert('Complete everything, it\'s important!');
+      }
+  });
+
+  // Function to show error message below each field
+  function showError(fieldId, errorMessage) {
+      let field = document.getElementById(fieldId);
+      let error = document.createElement('div');
+      error.classList.add('error');
+      error.style.color = 'red';
+      error.textContent = errorMessage;
+      field.parentNode.appendChild(error);
+  }
+
+  // Function to format the phone number as the user types
+  document.getElementById('phone').addEventListener('input', function(event) {
+      let phoneInput = event.target.value;
+// Remove any non-numeric characters except the leading '+'
+      phoneInput = phoneInput.replace(/[^\d+]/g, '');
+
+      // Format phone number
+      if (phoneInput.length > 1 && phoneInput.charAt(0) === '+') {
+          phoneInput = phoneInput.replace(/^(\+7)(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1($2)$3-$4-$5');
+      }
+
+      // Set the formatted phone number back to the input field
+      event.target.value = phoneInput;
+  });
+</script>
+
+<!-- Optional CSS for error messages -->
+<style>
+  .error {
+      margin-top: 5px;
+      font-size: 0.9rem;
+      color: red;
+  }
+
+  /* For the phone number error message */
+  #phoneError {
+      display: none;
+      font-size: 0.9rem;
+      color: red;
+  }
+</style>
+
+
+
+
+
 
 
 
@@ -890,9 +1009,40 @@
     </div>
 </section>
 <footer class="bg-dark text-white text-center py-4 mt-5">
-  <p class="mb-0">Created by <b>Zukhra & Akniyet</b> | SE-2409 | A&Z Store</p>
+  <div class="container d-flex justify-content-between align-items-center">
+    <!-- "A&Z Store" Text centered -->
+    <p class="mb-0" style="flex-grow: 1; text-align: center;">
+      Created by <b>Zukhra & Akniyet</b> | SE-2409 | A&Z Store
+    </p>
+
+    <!-- Current Date Display on the right corner -->
+    <span id="currentDateTimeFooter" style="font-size:1.5rem; text-align: right;"></span>
+  </div>
 </footer>
 
-    
+<!-- JavaScript to display current date and time -->
+<script>
+  function displayCurrentDateTime() {
+    let currentDate = new Date();
+    let formattedDate = currentDate.toLocaleString('en-US', {
+      weekday: 'long', // e.g., "Monday"
+      year: 'numeric', // e.g., "2024"
+      month: 'long', // e.g., "October"
+      day: 'numeric', // e.g., "9"
+      hour: 'numeric', // e.g., "10"
+      minute: 'numeric', // e.g., "45"
+      second: 'numeric', // e.g., "30"
+      hour12: true // Use 12-hour clock (AM/PM)
+    });
+
+    // Display the formatted date and time in the footer
+    document.getElementById('currentDateTimeFooter').innerText = formattedDate;
+  }
+
+  // Call the function every 1000 milliseconds (1 second) to update the time
+  setInterval(displayCurrentDateTime, 1000);
+</script>
+
+
 </body>
 </html>

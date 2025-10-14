@@ -831,10 +831,14 @@
 
 </section>
 
+
+
+
 <section class="contact" id="contact">
     <h1 class="heading"> <span> contact </span> us </h1>
 
     <div class="row">
+        <!-- Existing Contact Form -->
         <form id="contactForm" class="p-4 bg-light rounded shadow-sm">
             <div class="mb-3">
                 <input type="text" id="name" class="form-control" placeholder="Your Name">
@@ -854,7 +858,8 @@
                 <textarea id="message" class="form-control" rows="4" placeholder="Your Message"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-danger w-100">Send Message</button>
+            <!-- Popup Button to Open the Contact Us Form -->
+            <button type="button" class="btn btn-danger w-100" id="openBtn">Contact Us</button>
         </form>
 
         <div class="image">
@@ -863,107 +868,83 @@
     </div>
 </section>
 
-<!-- JavaScript for Form Validation and Phone Formatting -->
-<script>
-  document.getElementById('contactForm').addEventListener('submit', function(event) {
-      event.preventDefault();  // Prevent form submission to handle validation
+<!-- Popup Form -->
+<div id="popupForm" style="display: none;">
+    <h2>Contact Us</h2>
+    <form>
+        <label for="popupName">Name:</label><br>
+        <input type="text" id="popupName" name="name"><br><br>
+        <label for="popupEmail">Email:</label><br>
+        <input type="email" id="popupEmail" name="email"><br><br>
+        <textarea placeholder="Your Message" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Send Message">
+    </form>
+    <button class="close-btn" id="closeBtn">Close</button>
+</div>
 
-      // Clear any previous error messages
-      let errorMessages = document.querySelectorAll('.error');
-      errorMessages.forEach(message => message.remove());
+<!-- Overlay -->
+<div id="overlay" style="display: none;"></div>
 
-      // Get form field values
-      let name = document.getElementById('name').value;
-      let email = document.getElementById('email').value;
-      let phone = document.getElementById('phone').value;
-      let message = document.getElementById('message').value;
-
-      let isValid = true;
-
-      // Validate Name (only letters and spaces allowed)
-      let namePattern = /^[A-Za-z\s]+$/; // Regex for letters and spaces only
-      if (name.trim() === "" || !namePattern.test(name)) {
-          isValid = false;
-          showError('name', 'Please enter a valid name (letters only, no numbers).');
-      }
-
-      // Validate Email (must be in correct email format)
-      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-      if (!emailPattern.test(email)) {
-          isValid = false;
-          showError('email', 'Please enter a valid email.');
-      }
-
-      // Validate Phone (must match the regex pattern for phone number)
-      let phonePattern = /^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/;
-      if (!phonePattern.test(phone)) {
-          isValid = false;
-          document.getElementById('phoneError').style.display = 'inline'; // Show error for invalid phone number
-      } else {
-          document.getElementById('phoneError').style.display = 'none'; // Hide error if valid
-      }
-
-      // Validate Message (cannot be empty)
-      if (message.trim() === "") {
-          isValid = false;
-          showError('message', 'Message is required.');
-      }
-
-      // If all fields are valid, submit the form (or process the form data as needed)
-      if (isValid) {
-          alert('Form submitted successfully!');
-          // You can submit the form here if needed: this.submit();
-      } else {
-          // Display a general error message if any required field is missing
-          alert('Complete everything, it\'s important!');
-      }
-  });
-
-  // Function to show error message below each field
-  function showError(fieldId, errorMessage) {
-      let field = document.getElementById(fieldId);
-      let error = document.createElement('div');
-      error.classList.add('error');
-      error.style.color = 'red';
-      error.textContent = errorMessage;
-      field.parentNode.appendChild(error);
-  }
-
-  // Function to format the phone number as the user types
-  document.getElementById('phone').addEventListener('input', function(event) {
-      let phoneInput = event.target.value;
-// Remove any non-numeric characters except the leading '+'
-      phoneInput = phoneInput.replace(/[^\d+]/g, '');
-
-      // Format phone number
-      if (phoneInput.length > 1 && phoneInput.charAt(0) === '+') {
-          phoneInput = phoneInput.replace(/^(\+7)(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1($2)$3-$4-$5');
-      }
-
-      // Set the formatted phone number back to the input field
-      event.target.value = phoneInput;
-  });
-</script>
-
-<!-- Optional CSS for error messages -->
 <style>
-  .error {
-      margin-top: 5px;
-      font-size: 0.9rem;
-      color: red;
-  }
+    /* Style for the popup */
+    #popupForm {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    
+    /* Overlay */
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
 
-  /* For the phone number error message */
-  #phoneError {
-      display: none;
-      font-size: 0.9rem;
-      color: red;
-  }
+    /* Close button styling */
+    .close-btn {
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        cursor: pointer;
+        border: none;
+    }
 </style>
 
+<script>
+    // Get elements for popup functionality
+    const openBtn = document.getElementById('openBtn');
+    const popupForm = document.getElementById('popupForm');
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closeBtn');
 
+    // Open the popup when "Contact Us" button is clicked
+    openBtn.onclick = function() {
+        popupForm.style.display = 'block';
+        overlay.style.display = 'block';
+    }
 
+    // Close the popup when clicking the close button
+    closeBtn.onclick = function() {
+        popupForm.style.display = 'none';
+        overlay.style.display = 'none';
+    }
 
+    // Close the popup when clicking outside the form
+    overlay.onclick = function() {
+        popupForm.style.display = 'none';
+        overlay.style.display = 'none';
+    }
+</script>
 
 
 

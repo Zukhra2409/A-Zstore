@@ -1,224 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A & Z store</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A & Z store</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="super.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg bg-white shadow sticky-top border-bottom" style="padding:10px 0;">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="#" style="color:#e84393; font-size:2rem;">
-      A&Zstore<span>.</span>
-    </a>
+    <div id="toast" class="position-fixed bottom-0 end-0 m-3" style="display:none"></div>
+  <nav class="navbar navbar-expand-lg bg-white shadow sticky-top border-bottom" style="padding:10px 0;">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html" style="color:#e84393; font-size:2rem;">A&Zstore<span>.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse" id="nav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
-        <li class="nav-item"><a class="nav-link" href="register.html">Login</a></li>
-      </ul>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
+          <li class="nav-item"><a class="nav-link" href="register.html">Login</a></li>
+                    <li class="nav-item ms-2">
+    <button id="themeBtn" class="btn btn-outline-dark btn-sm px-3">🌙 Night Mode</button>
+  </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-
-<div class="home-container">
-
+  <div class="home-container">
     <section class="home" id="home">
-
-        <div class="content">
-            <h3>Gift Shop</h3>
-            <span> For The Best &amp; Beautiful Women </span>
-            <p>Our store is created to help you express your feelings and give happiness to dear women. Every gift here is filled with love, tenderness and care.</p>
-            <a href="#" class="btn">shop now</a>
-        </div>
-        
+      <div class="content">
+        <h3>Gift Shop</h3>
+        <span> For The Best &amp; Beautiful Women </span>
+        <p id="message">
+          Our store is created to help you express your feelings and give happiness to dear women. Every gift here is filled with love, tenderness, and care.
+        </p>
+        <a href="#" class="btn" id="shopNowBtn">shop now</a>
+      </div>
     </section>
-
-</div>
-
-<section class="home-container" id="home">
-  ...
-</section>
-
-<section id="gallery" class="py-5">
-  <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
-
-
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="3"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="4"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="5"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="6"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="7"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="8"></button>
-    </div>
-
-    <div class="carousel-inner">
-      <div class="carousel-item active"><img src="images/flowww.webp" class="d-block w-100" alt="1"></div>
-      <div class="carousel-item"><img src="images/acccc.jpg" class="d-block w-100" alt="2"></div>
-      <div class="carousel-item"><img src="images/dubaichoco.jpg" class="d-block w-100" alt="3"></div>
-      <div class="carousel-item"><img src="images/curt.jpg" class="d-block w-100" alt="4"></div>
-      <div class="carousel-item"><img src="images/chocostro.jpg" class="d-block w-100" alt="5"></div>
-      <div class="carousel-item"><img src="images/hours.jpg" class="d-block w-100" alt="6"></div>
-      <div class="carousel-item"><img src="images/obraz.jpg" class="d-block w-100" alt="7"></div>
-      <div class="carousel-item"><img src="images/cvety.jpg" class="d-block w-100" alt="8"></div>
-      <div class="carousel-item"><img src="images/fruct.jpg" d-block w-100" alt="9"></div>
-    </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
-
   </div>
-</section>
 
+  <section id="gallery" class="py-5">
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="3"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="4"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="5"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="6"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="7"></button>
+        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="8"></button>
+      </div>
 
-<section class="container py-5 my-5">
-  <div class="row align-items-center">
-    
+      <div class="carousel-inner">
+        <div class="carousel-item active"><img src="images/flowww.webp" class="d-block w-100" alt="1"></div>
+        <div class="carousel-item"><img src="images/acccc.jpg" class="d-block w-100" alt="2"></div>
+        <div class="carousel-item"><img src="images/dubaichoco.jpg" class="d-block w-100" alt="3"></div>
+        <div class="carousel-item"><img src="images/curt.jpg" class="d-block w-100" alt="4"></div>
+        <div class="carousel-item"><img src="images/chocostro.jpg" class="d-block w-100" alt="5"></div>
+        <div class="carousel-item"><img src="images/hours.jpg" class="d-block w-100" alt="6"></div>
+        <div class="carousel-item"><img src="images/obraz.jpg" class="d-block w-100" alt="7"></div>
+        <div class="carousel-item"><img src="images/cvety.jpg" class="d-block w-100" alt="8"></div>
+        <div class="carousel-item"><img src="images/fruct.jpg" class="d-block w-100" alt="9"></div>
+      </div>
 
-    <div class="col-lg-6 text-center">
-      <img src="images/gorsh.jpg" class="img-fluid rounded shadow" alt="Flower pot">
+      <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
     </div>
+  </section>
 
-<div class="col-lg-6 d-flex flex-column justify-content-center">
-  <h3 class="text-pink">Beautiful Flower Pot</h3>
-  <p>Our flower pots bring happiness and beauty to your home. Each bouquet is arranged with love and care.</p>
-  <!-- Added onclick attribute to trigger the JavaScript function -->
-  <button class="btn btn-dark btn-lg mt-3" onclick="toggleBackgroundColor()">Add to Cart</button>
-</div>
+  <section class="container py-5 my-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6 text-center">
+        <img src="images/gorsh.jpg" class="img-fluid rounded shadow" alt="Flower pot">
+      </div>
+      <div class="col-lg-6 d-flex flex-column justify-content-center">
+        <h3 class="text-pink">Beautiful Flower Pot</h3>
+        <p>Our flower pots bring happiness and beauty to your home. Each bouquet is arranged with love and care.</p>
+        <button class="btn btn-dark btn-lg mt-3" onclick="toggleBackgroundColor()">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+  
 
+  <section class="container my-5">
+    <h1 class="heading"><span>Our Categories</span></h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="images/flowe.jpg" class="card-img-top" alt="Flowers">
+          <div class="card-body text-center">
+            <h5 class="card-title">Flowers</h5>
+            <p class="card-text">Fresh bouquets for every occasion.</p>
+            <a href="#flowers" class="btn btn-primary">Shop Now</a>
+          </div>
+        </div>
+      </div>
 
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="images/choco.jpg" class="card-img-top" alt="Chocolates">
+          <div class="card-body text-center">
+            <h5 class="card-title">Chocolates</h5>
+            <p class="card-text">Sweet treats to make her smile.</p>
+            <a href="#chocolates" class="btn btn-primary">Shop Now</a>
+          </div>
+        </div>
+      </div>
 
-<script>
-  let isPink = false; 
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="images/acc.jpg" class="card-img-top" alt="Accessories">
+          <div class="card-body text-center">
+            <h5 class="card-title">Accessories</h5>
+            <p class="card-text">Stylish gifts for daily life.</p>
+            <a href="#accessories" class="btn btn-primary">Shop Now</a>
+          </div>
+        </div>
+      </div>
 
-  function toggleBackgroundColor() {
-    if (isPink) {
-      document.body.style.backgroundColor = 'white';
-    } else {
-      document.body.style.backgroundColor = '#FFD8F0'; 
-    }
-
-    isPink = !isPink;
-  }
-</script>
-
-<section class="container my-5">
-  <h1 class="heading"><span>Our Categories</span></h1>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="images/flowe.jpg" class="card-img-top" alt="Flowers">
-        <div class="card-body text-center">
-          <h5 class="card-title">Flowers</h5>
-          <p class="card-text">Fresh bouquets for every occasion.</p>
-          <a href="#flowers" class="btn btn-primary">Shop Now</a>
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="images/clothes.jpg" class="card-img-top" alt="Clothes">
+          <div class="card-body text-center">
+            <h5 class="card-title">Clothes</h5>
+            <p class="card-text">Trendy outfits to complete her look.</p>
+            <a href="#clothes" class="btn btn-primary">Shop Now</a>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="images/choco.jpg" class="card-img-top" alt="Chocolates">
-        <div class="card-body text-center">
-          <h5 class="card-title">Chocolates</h5>
-          <p class="card-text">Sweet treats to make her smile.</p>
-          <a href="#chocolates" class="btn btn-primary">Shop Now</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="images/acc.jpg" class="card-img-top" alt="Accessories">
-        <div class="card-body text-center">
-          <h5 class="card-title">Accessories</h5>
-          <p class="card-text">Stylish gifts for daily life.</p>
-          <a href="#accessories" class="btn btn-primary">Shop Now</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card h-100 shadow-sm">
-        <img src="images/clothes.jpg" class="card-img-top" alt="Clothes">
-        <div class="card-body text-center">
-          <h5 class="card-title">Clothes</h5>
-          <p class="card-text">Trendy outfits to complete her look.</p>
-          <a href="#clothes" class="btn btn-primary">Shop Now</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-<div class="icons-container">
-
-    <section class="box-container">
-
-        <div class="box">
-            <img src="images/icon-1.png" alt="">
-            <div class="info">
-                <h3>free delivery</h3>
-                <span>on all orders</span>
-            </div>
-        </div>
-    
-        <div class="box">
-            <img src="images/icon-2.png" alt="">
-            <div class="info">
-                <h3>10 days returns</h3>
-                <span>moneyback guarantee</span>
-            </div>
-        </div>
-    
-        <div class="box">
-            <img src="images/icon-3.png" alt="">
-            <div class="info">
-                <h3>offer & gifts</h3>
-                <span>on all orders</span>
-            </div>
-        </div>
-    
-        <div class="box">
-            <img src="images/icon-4.png" alt="">
-            <div class="info">
-                <h3>secure paymens</h3>
-                <span>protected by paypal</span>
-            </div>
-        </div>
-       
-    </section>
-
-</div>
-
-
+  </section>
 <section class="products" id="flowers">
     <h1 class="heading"> <span>Flowers</span> </h1>
 
@@ -831,14 +760,19 @@
 
 </section>
 
-
-
+<div class="copy-widget">
+  <input id="brandText" class="copy-input" value="A&Z STORE" readonly>
+  <button class="copy-btn pretty" data-copy="#brandText">
+    <i class="fas fa-copy"></i><span>Copy</span>
+  </button>
+  <span class="copy-toast" aria-live="polite" hidden>Copied!</span>
+</div>
 
 <section class="contact" id="contact">
     <h1 class="heading"> <span> contact </span> us </h1>
 
     <div class="row">
-        <!-- Existing Contact Form -->
+
         <form id="contactForm" class="p-4 bg-light rounded shadow-sm">
             <div class="mb-3">
                 <input type="text" id="name" class="form-control" placeholder="Your Name">
@@ -849,7 +783,7 @@
             </div>
 
             <div class="mb-3">
-                <!-- Phone number input with the correct placeholder and formatting -->
+
                 <input type="tel" id="phone" class="form-control" placeholder="+7(999)999-99-99" required>
                 <small id="phoneError" class="form-text text-danger" style="display: none;">Please enter a valid phone number in the format: +7(999)999-99-99</small>
             </div>
@@ -858,7 +792,7 @@
                 <textarea id="message" class="form-control" rows="4" placeholder="Your Message"></textarea>
             </div>
 
-            <!-- Popup Button to Open the Contact Us Form -->
+
             <button type="button" class="btn btn-danger w-100" id="openBtn">Contact Us</button>
         </form>
 
@@ -868,159 +802,77 @@
     </div>
 </section>
 
-<!-- Popup Form -->
+
 <div id="popupForm" style="display: none;">
     <h2>Contact Us</h2>
     <form>
         <label for="popupName">Name:</label><br>
         <input type="text" id="popupName" name="name"><br><br>
+
         <label for="popupEmail">Email:</label><br>
         <input type="email" id="popupEmail" name="email"><br><br>
-        <textarea placeholder="Your Message" rows="4" cols="50"></textarea><br><br>
-        <input type="submit" value="Send Message">
+
+        <textarea placeholder="Your Opinion" rows="4" cols="50"></textarea><br><br>
+        <div class="rating">
+            <input type="number" name="rating" hidden>
+            <i class='bx bx-star star' style="--i: 0;"></i>
+            <i class='bx bx-star star' style="--i: 1;"></i>
+            <i class='bx bx-star star' style="--i: 2;"></i>
+            <i class='bx bx-star star' style="--i: 3;"></i>
+            <i class='bx bx-star star' style="--i: 4;"></i>
+        </div>
+        			<div class="btn-group">
+				<button type="submit" class="btn submit">Submit</button>
+                <button class="btn cancel" id="closeBtn">Cancel</button>
+			</div>
     </form>
-    <button class="close-btn" id="closeBtn">Close</button>
+   
 </div>
-
-<!-- Overlay -->
 <div id="overlay" style="display: none;"></div>
-
-<style>
-    /* Style for the popup */
-    #popupForm {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        padding: 20px;
-        border: 1px solid #ccc;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-    }
-    
-    /* Overlay */
-    #overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-    }
-
-    /* Close button styling */
-    .close-btn {
-        background-color: red;
-        color: white;
-        padding: 5px 10px;
-        cursor: pointer;
-        border: none;
-    }
-</style>
-
-<script>
-    // Get elements for popup functionality
-    const openBtn = document.getElementById('openBtn');
-    const popupForm = document.getElementById('popupForm');
-    const overlay = document.getElementById('overlay');
-    const closeBtn = document.getElementById('closeBtn');
-
-    // Open the popup when "Contact Us" button is clicked
-    openBtn.onclick = function() {
-        popupForm.style.display = 'block';
-        overlay.style.display = 'block';
-    }
-
-    // Close the popup when clicking the close button
-    closeBtn.onclick = function() {
-        popupForm.style.display = 'none';
-        overlay.style.display = 'none';
-    }
-
-    // Close the popup when clicking outside the form
-    overlay.onclick = function() {
-        popupForm.style.display = 'none';
-        overlay.style.display = 'none';
-    }
-</script>
-
-
-
-
-<section class="footer">
-
+  <section class="footer">
     <div class="box-container">
+      <div class="box">
+        <h3>Quick Links</h3>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Products</a>
+        <a href="#">Contact</a>
+      </div>
 
-        <div class="box">
-            <h3>quick links</h3>
-            <a href="#">home</a>
-            <a href="#">about</a>
-            <a href="#">products</a>
-            <a href="#">contact</a>
-        </div>
+      <div class="box">
+        <h3>Extra Links</h3>
+        <a href="#">My Account</a>
+        <a href="#">My Order</a>
+        <a href="#">My Favorite</a>
+      </div>
 
-        <div class="box">
-            <h3>extra links</h3>
-            <a href="#">my account</a>
-            <a href="#">my order</a>
-            <a href="#">my favorite</a>
-        </div>
+      <div class="box">
+        <h3>Locations</h3>
+        <a href="#">Kazakhstan</a>
+        <a href="#">USA</a>
+        <a href="#">Russia</a>
+        <a href="#">France</a>
+      </div>
 
-        <div class="box">
-            <h3>locations</h3>
-            <a href="#">Kazakhstan</a>
-            <a href="#">USA</a>
-            <a href="#">Russia</a>
-            <a href="#">France</a>
-        </div>
-
-        <div class="box">
-            <h3>contact info</h3>
-            <a href="#">+77000907098</a>
-            <a href="#">242409@astanait.edu.kz</a>
-            <a href="#">Astana, Kazakhstan - 010000</a>
-            <img src="images/payment.png" alt="">
-        </div>
-
+      <div class="box">
+        <h3>Contact Info</h3>
+        <a href="#">+77000907098</a>
+        <a href="#">242409@astanait.edu.kz</a>
+        <a href="#">Astana, Kazakhstan - 010000</a>
+        <img src="images/payment.png" alt="">
+      </div>
     </div>
-</section>
-<footer class="bg-dark text-white text-center py-4 mt-5">
-  <div class="container d-flex justify-content-between align-items-center">
-    <!-- "A&Z Store" Text centered -->
-    <p class="mb-0" style="flex-grow: 1; text-align: center;">
-      Created by <b>Zukhra & Akniyet</b> | SE-2409 | A&Z Store
-    </p>
+  </section>
 
-    <!-- Current Date Display on the right corner -->
-    <span id="currentDateTimeFooter" style="font-size:1.5rem; text-align: right;"></span>
-  </div>
-</footer>
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container d-flex justify-content-between align-items-center">
+      <p class="mb-0" style="flex-grow: 1; text-align: center;">
+        Created by <b>Zukhra &amp; Akniyet</b> | SE-2409 | A&amp;Z Store
+      </p>
+      <span id="currentDateTimeFooter" style="font-size:1.5rem; text-align: right;"></span>
+    </div>
+  </footer>
 
-<!-- JavaScript to display current date and time -->
-<script>
-  function displayCurrentDateTime() {
-    let currentDate = new Date();
-    let formattedDate = currentDate.toLocaleString('en-US', {
-      weekday: 'long', // e.g., "Monday"
-      year: 'numeric', // e.g., "2024"
-      month: 'long', // e.g., "October"
-      day: 'numeric', // e.g., "9"
-      hour: 'numeric', // e.g., "10"
-      minute: 'numeric', // e.g., "45"
-      second: 'numeric', // e.g., "30"
-      hour12: true // Use 12-hour clock (AM/PM)
-    });
-
-    // Display the formatted date and time in the footer
-    document.getElementById('currentDateTimeFooter').innerText = formattedDate;
-  }
-
-  // Call the function every 1000 milliseconds (1 second) to update the time
-  setInterval(displayCurrentDateTime, 1000);
-</script>
-
-
+  <script defer src="main.js"></script>
 </body>
 </html>

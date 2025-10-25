@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="super.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <title>Login & Register</title>
   <style>
     body {
@@ -94,7 +96,7 @@
     }
 
     input.invalid {
-      border-color: #e63946;
+      border-color: #72131a;
       box-shadow: 0 0 4px rgba(230,57,70,0.3);
     }
   </style>
@@ -108,22 +110,22 @@
     </div>
 
     <form class="form active" id="loginForm">
-      <input type="text" id="loginUser" placeholder="Username" required>
-      <input type="password" id="loginPass" placeholder="Password" required>
+      <input type="text" id="loginUser" placeholder="Username">
+      <input type="password" id="loginPass" placeholder="Password">
       <button type="submit">Login</button>
     </form>
 
     <form class="form" id="registerForm">
-      <input type="text" id="regUser" placeholder="Username" required>
+      <input type="text" id="regUser" placeholder="Username">
       <small class="error"></small>
 
-      <input type="email" id="regEmail" placeholder="Email" required>
+      <input type="email" id="regEmail" placeholder="Email">
       <small class="error"></small>
 
-      <input type="password" id="regPass" placeholder="Password" required>
+      <input type="password" id="regPass" placeholder="Password">
       <small class="error"></small>
 
-      <input type="password" id="regConfirm" placeholder="Confirm Password" required>
+      <input type="password" id="regConfirm" placeholder="Confirm Password">
       <small class="error"></small>
 
       <button type="submit">Register</button>
@@ -199,13 +201,16 @@
         valid = false;
       } else showError(userInput, '');
 
-      // Если всё ок
+ 
       if (valid) {
         regForm.reset();
         successMsg.hidden = false;
       }
     });
   </script>
-
+<footer class="text-center py-3 bg-light border-top">
+  <p id="currentDateTimeFooter" style="margin: 0; font-size: 1.2rem; color:#666;"></p>
+</footer>
+<script src="main.js"></script>
 </body>
 </html>

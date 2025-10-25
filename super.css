@@ -750,3 +750,134 @@ section {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
+
+body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+/* ===== Night Mode base ===== */
+html, body {
+  transition: background-color .35s ease, color .35s ease;
+}
+
+/* Тёмный фон и текст */
+body.dark-mode {
+  background-color: #121212;
+  color: #f1f3f5;
+}
+
+/* Шапка/карточки/блоки на тёмном фоне */
+body.dark-mode .navbar,
+body.dark-mode .card,
+body.dark-mode .order-container,
+body.dark-mode .products .box,
+body.dark-mode .box,
+body.dark-mode .accordion-item,
+body.dark-mode footer,
+body.dark-mode .home-container, 
+body.dark-mode section {
+  background-color: #1b1b1b !important;
+  color: #f1f3f5 !important;
+}
+
+/* Заголовки и ссылки */
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode .heading,
+body.dark-mode .nav-link,
+body.dark-mode a {
+  color: #f1f3f5 !important;
+}
+
+/* Кнопка темы меняет контур автоматически */
+body.dark-mode .btn-outline-dark {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+/* === Кнопка Night Mode — общий стиль === */
+#themeBtn {
+  background: #e84393;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 6px 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+#themeBtn:hover {
+  background: #333;
+  color: #fff;
+}
+.cart-total {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffe6f3, #fff);
+  border: 2px solid #e84393;
+  border-radius: 30px;
+  padding: 12px 28px;
+  box-shadow: 0 4px 10px rgba(232, 67, 147, 0.2);
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.cart-total:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(232, 67, 147, 0.3);
+}
+
+.cart-icon {
+  font-size: 1.6rem;
+  margin-right: 8px;
+}
+
+.cart-text {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #333;
+  margin-right: 6px;
+}
+
+.cart-amount {
+  font-weight: 700;
+  color: #e84393;
+  font-size: 1.3rem;
+}
+
+/* 🌙 Dark mode version */
+body.dark-mode .cart-total {
+  background: linear-gradient(135deg, #2c2c2c, #1c1c1c);
+  border: 2px solid #ff80bf;
+  box-shadow: 0 4px 10px rgba(255, 128, 191, 0.2);
+}
+
+body.dark-mode .cart-text {
+  color: #f8f8f8;
+}
+
+body.dark-mode .cart-amount {
+  color: #ff9fd9;
+}
+.cart-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #ffe6f3, #fff);
+  border: 2px solid #e84393;
+  border-radius: 30px;
+  padding: 10px 22px;
+  box-shadow: 0 4px 10px rgba(232, 67, 147, .18);
+  font-weight: 600;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.cart-total:hover { transform: translateY(-2px); box-shadow: 0 7px 16px rgba(232,67,147,.28); }
+.cart-icon  { font-size: 1.6rem; }
+.cart-text  { color:#333; }
+.cart-amount{ color:#e84393; }
+
+body.dark-mode .cart-total {
+  background: linear-gradient(135deg, #2c2c2c, #1c1c1c);
+  border-color: #ff80bf;
+  box-shadow: 0 4px 10px rgba(255,128,191,.16);
+}
+body.dark-mode .cart-text  { color:#f1f3f5; }
+body.dark-mode .cart-amount{ color:#ff9fd9; }

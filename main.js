@@ -578,3 +578,4 @@ document.addEventListener("click", async (e) => {
   window.addEventListener('orientationchange', loadVisible);
   loadVisible(); // первичный прогон
 })();
+

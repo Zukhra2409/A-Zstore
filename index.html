@@ -11,10 +11,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="super.css">
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
+       <div id="progress-container">
+  <div id="progress-bar"></div>
+</div>
+
     <div id="toast" class="position-fixed bottom-0 end-0 m-3" style="display:none"></div>
   <nav class="navbar navbar-expand-lg bg-white shadow sticky-top border-bottom" style="padding:10px 0;">
     <div class="container">
@@ -30,13 +35,95 @@
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
           <li class="nav-item"><a class="nav-link" href="register.html">Login</a></li>
-                    <li class="nav-item ms-2">
+            <li class="nav-item ms-2">
     <button id="themeBtn" class="btn btn-outline-dark btn-sm px-3">🌙 Night Mode</button>
-  </li>
+</li> 
         </ul>
       </div>
     </div>
   </nav>
+
+<script>
+  const themeButton = document.getElementById('themeBtn');
+  const body = document.body;
+
+  
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-theme');
+    themeButton.textContent = '🌞 Light Mode'; 
+  } else {
+    body.classList.remove('dark-theme');
+    themeButton.textContent = '🌙 Night Mode'; 
+  }
+
+  
+  themeButton.addEventListener('click', () => {
+    if (body.classList.contains('dark-theme')) {
+      body.classList.remove('dark-theme');
+      themeButton.textContent = '🌙 Night Mode'; 
+      localStorage.setItem('theme', 'light'); 
+    } else {
+      body.classList.add('dark-theme');
+      themeButton.textContent = '🌞 Light Mode'; 
+      localStorage.setItem('theme', 'dark'); 
+    }
+  });
+
+  
+  const menuItems = document.querySelectorAll('.nav-item');
+  let currentIndex = 0;
+
+  function updateFocus() {
+    menuItems.forEach(item => item.classList.remove('focused'));  
+    menuItems[currentIndex].classList.add('focused');  
+    menuItems[currentIndex].querySelector('a')?.focus();  
+  }
+
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+      currentIndex = (currentIndex + 1) % menuItems.length;  
+      updateFocus();
+    } else if (event.key === 'ArrowLeft') {
+      currentIndex = (currentIndex - 1 + menuItems.length) % menuItems.length;  
+      updateFocus();
+    }
+  });
+
+ 
+  updateFocus();
+</script>
+
+<style>
+  .nav-item {
+    padding: 5px;
+  }
+
+
+  .focused {
+    background-color: #e80d94;
+    color: white;
+  }
+
+  
+  .dark-theme {
+    background-color: #121212; 
+    color: white; 
+  }
+
+ 
+  .dark-theme .navbar, .dark-theme .btn {
+    background-color: #333; 
+    color: #fff; 
+    border-color: #444; 
+  }
+
+  .dark-theme .btn-outline-dark {
+    background-color: #444; 
+    color: #fff; 
+    border-color: #555; 
+  }
+</style>
 
   <div class="home-container">
     <section class="home" id="home">
@@ -50,6 +137,33 @@
       </div>
     </section>
   </div>
+
+
+  
+<script>
+
+    const shopNowButton = document.getElementById('shopNowBtn');
+    const messageElement = document.getElementById('message');
+
+    shopNowButton.addEventListener('click', function(event) {
+        event.preventDefault(); 
+
+
+        if (messageElement.textContent === "Our store is created to help you express your feelings and give happiness to dear women. Every gift here is filled with love, tenderness, and care.") {
+    
+            messageElement.innerHTML = "Special Offer:<br>Get 20% off on your first purchase,<br>use code 'PRETTYWOMEN'!";
+        } else {
+
+            messageElement.innerHTML = "Our store is created to help you express your feelings and give happiness to dear women. Every gift here is filled with love, tenderness, and care.";
+        }
+    });
+</script>
+
+
+<section class="home-container" id="home">
+  ...
+</section>
+
 
   <section id="gallery" class="py-5">
     <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -94,11 +208,28 @@
       <div class="col-lg-6 d-flex flex-column justify-content-center">
         <h3 class="text-pink">Beautiful Flower Pot</h3>
         <p>Our flower pots bring happiness and beauty to your home. Each bouquet is arranged with love and care.</p>
-        <button class="btn btn-dark btn-lg mt-3" onclick="toggleBackgroundColor()">Add to Cart</button>
-      </div>
-    </div>
-  </section>
+
+        
+<section class="container my-5">
+<button class="btn btn-dark btn-lg mt-3" onclick="toggleBackgroundColor()">Add to Cart</button>
+
+
+<script>
   
+  const backgroundColors = [ '#D7BFDC', '#FFD8F0', '#ADD8E6', '#98FB98', '#FFFACD', '#FFB6C1', 'white']; 
+
+  let colorIndex = 0; 
+
+  function toggleBackgroundColor() {
+    document.body.style.backgroundColor = backgroundColors[colorIndex];
+
+    
+    colorIndex = (colorIndex + 1) % backgroundColors.length; 
+  }
+</script>
+  </div>
+</section>
+
 
   <section class="container my-5">
     <h1 class="heading"><span>Our Categories</span></h1>
@@ -148,6 +279,112 @@
       </div>
     </div>
   </section>
+
+  
+<div class="icons-container">
+    <section class="box-container">
+        <div class="box">
+            <img src="images/icon-1.png" alt="">
+            <div class="info">
+                <h3>free delivery</h3>
+                <span>on all orders</span>
+                <div class="counter">
+                    <span class="count" data-count="115100">0</span> Orders
+                </div>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="images/icon-2.png" alt="">
+            <div class="info">
+                <h3>10 days returns</h3>
+                <span>moneyback guarantee</span>
+                <div class="counter">
+                    <span class="count" data-count="2345">0</span> Returns
+                </div>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="images/icon-3.png" alt="">
+            <div class="info">
+                <h3>offer & gifts</h3>
+                <span>on all orders</span>
+                <div class="counter">
+                    <span class="count" data-count="96363">0</span> Offers
+                </div>
+            </div>
+        </div>
+    
+        <div class="box">
+            <img src="images/icon-4.png" alt="">
+            <div class="info">
+                <h3>secure payments</h3>
+                <span>protected by paypal</span>
+                <div class="counter">
+                    <span class="count" data-count="289755">0</span> Payments
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<style>
+.box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.box {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 20%; 
+}
+
+
+.counter {
+    font-size: 1em;
+    font-weight: bold;
+    color: rgb(229, 74, 144); 
+    margin-top: 10px;
+}
+
+.count {
+    font-size: 2em;
+    color: rgb(231, 28, 95);
+}
+</style>
+
+
+<script>
+    $(document).ready(function () {
+    $('.count').each(function () {
+        var $this = $(this);
+        var countTo = $this.attr('data-count');
+        $({ countNum: $this.text() }).animate(
+            { countNum: countTo },
+            {
+                duration: 2000,  
+                easing: 'swing', 
+                step: function () {
+                    $this.text(Math.floor(this.countNum)); 
+                },
+                complete: function () {
+                    $this.text(this.countNum);  
+                },
+            }
+        );
+    });
+});
+</script>
+
+
 <section class="products" id="flowers">
     <h1 class="heading"> <span>Flowers</span> </h1>
 
@@ -759,7 +996,6 @@
     </div>
 
 </section>
-
 <div class="copy-widget">
   <input id="brandText" class="copy-input" value="A&Z STORE" readonly>
   <button class="copy-btn pretty" data-copy="#brandText">
@@ -767,6 +1003,35 @@
   </button>
   <span class="copy-toast" aria-live="polite" hidden>Copied!</span>
 </div>
+
+<script>
+
+  const copyButton = document.querySelector('.copy-btn');
+  const copyInput = document.querySelector(copyButton.getAttribute('data-copy'));
+  const copyToast = document.querySelector('.copy-toast');
+
+  
+  copyButton.addEventListener('click', () => {
+   
+    navigator.clipboard.writeText(copyInput.value).then(() => {
+     
+      copyButton.querySelector('span').textContent = 'Copied!';
+      
+  
+      copyToast.hidden = false;
+
+      
+      setTimeout(() => {
+        copyToast.hidden = true;
+       
+        copyButton.querySelector('span').textContent = 'Copy';
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+    });
+  });
+</script>
+
 
 <section class="contact" id="contact">
     <h1 class="heading"> <span> contact </span> us </h1>
@@ -821,14 +1086,284 @@
             <i class='bx bx-star star' style="--i: 3;"></i>
             <i class='bx bx-star star' style="--i: 4;"></i>
         </div>
-        			<div class="btn-group">
-				<button type="submit" class="btn submit">Submit</button>
-                <button class="btn cancel" id="closeBtn">Cancel</button>
-			</div>
-    </form>
-   
+        <div class="btn-group">
+            <button type="button" class="btn submit" id="submitBtn">Submit</button>
+            <button class="btn cancel" id="closeBtn">Cancel</button>
+        </div>
+    </form>  
 </div>
+
+<style>
+ 
+    .submit {
+        position: relative;
+        padding-right: 40px; 
+    }
+
+    .submit.loading {
+        pointer-events: none;  
+    }
+
+    .submit .spinner {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 3px solid #f3f3f3; 
+        border-top: 3px solid #f02476; 
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .submit .please-wait {
+        display: none;
+        color: #3498db; 
+        font-size: 14px;
+    }
+
+    .submit.loading .please-wait {
+        display: inline;
+    }
+
+    .submit.user-submitted {
+        color: green; 
+    }
+</style>
+
+<script>
+    document.getElementById('submitBtn').addEventListener('click', function(event) {
+        event.preventDefault(); 
+
+        var submitButton = document.getElementById('submitBtn');
+
+        
+        if (submitButton.classList.contains('user-submitted')) {
+            alert("The message has been successfully submitted!");
+            return; 
+        }
+
+        
+        submitButton.classList.add('loading'); 
+        submitButton.innerHTML = 'Please wait...'; 
+
+        
+        var spinner = document.createElement('div');
+        spinner.classList.add('spinner');
+        submitButton.appendChild(spinner);
+
+        
+        submitButton.disabled = true;
+
+       
+        setTimeout(function() {
+            
+            submitButton.disabled = false; 
+            submitButton.classList.remove('loading'); 
+            submitButton.innerHTML = 'Submit'; 
+            spinner.remove(); 
+
+            
+            submitButton.classList.add('user-submitted');
+            submitButton.innerHTML = 'Successfully submitted!'; 
+        }, 3000); 
+    });
+</script>
+
+
 <div id="overlay" style="display: none;"></div>
+
+<script>
+    document.querySelector('#openBtn').addEventListener('click', function() {
+        document.querySelector('#popupForm').style.display = 'block';
+        document.querySelector('#overlay').style.display = 'block';
+    });
+
+    document.querySelector('#closeBtn').addEventListener('click', function() {
+        document.querySelector('#popupForm').style.display = 'none';
+        document.querySelector('#overlay').style.display = 'none';
+    });
+
+    document.querySelector('#overlay').addEventListener('click', function() {
+        document.querySelector('#popupForm').style.display = 'none';
+        document.querySelector('#overlay').style.display = 'none';
+    });
+
+    const allStar = document.querySelectorAll('.rating .star');
+    const ratingValue = document.querySelector('.rating input');
+
+    allStar.forEach((item, idx) => {
+        item.addEventListener('click', function () {
+            let click = 0;
+            ratingValue.value = idx + 1;
+
+
+            allStar.forEach(i => {
+                i.classList.replace('bxs-star', 'bx-star');
+                i.classList.remove('active');
+            });
+
+
+            for (let i = 0; i <= idx; i++) {
+                allStar[i].classList.replace('bx-star', 'bxs-star');
+                allStar[i].classList.add('active');
+            }
+
+            for (let i = idx + 1; i < allStar.length; i++) {
+                allStar[i].style.setProperty('--i', click);
+                click++;
+            }
+        });
+    });
+</script>
+
+
+<style>
+    #popupForm {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+
+
+    .close-btn {
+        background-color: red;
+        color: white;
+        padding: 5px 10px;
+        cursor: pointer;
+        border: none;
+    }
+
+
+    .star {
+        font-size: 30px;
+        color: gray; 
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .star.active {
+        color: gold; 
+    }
+
+    .star.bxs-star {
+        color: gold; 
+    }
+</style>
+
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault();  
+
+      let errorMessages = document.querySelectorAll('.error');
+      errorMessages.forEach(message => message.remove());
+
+      let name = document.getElementById('name').value;
+      let email = document.getElementById('email').value;
+      let phone = document.getElementById('phone').value;
+      let message = document.getElementById('message').value;
+
+      let isValid = true;
+
+  
+      let namePattern = /^[A-Za-z\s]+$/; 
+      if (name.trim() === "" || !namePattern.test(name)) {
+          isValid = false;
+          showError('name', 'Please enter a valid name (letters only, no numbers).');
+      }
+
+      let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      if (!emailPattern.test(email)) {
+          isValid = false;
+          showError('email', 'Please enter a valid email.');
+      }
+
+      let phonePattern = /^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/;
+      if (!phonePattern.test(phone)) {
+          isValid = false;
+          document.getElementById('phoneError').style.display = 'inline';
+      } else {
+          document.getElementById('phoneError').style.display = 'none'; 
+      }
+
+    
+      if (message.trim() === "") {
+          isValid = false;
+          showError('message', 'Message is required.');
+      }
+
+
+      if (isValid) {
+          alert('Form submitted successfully!');
+      } else {
+          alert('Complete everything, it\'s important!');
+      }
+  });
+
+  
+  function showError(fieldId, errorMessage) {
+      let field = document.getElementById(fieldId);
+      let error = document.createElement('div');
+      error.classList.add('error');
+      error.style.color = 'red';
+      error.textContent = errorMessage;
+      field.parentNode.appendChild(error);
+  }
+
+
+  document.getElementById('phone').addEventListener('input', function(event) {
+      let phoneInput = event.target.value;
+
+
+      phoneInput = phoneInput.replace(/[^\d+]/g, '');
+
+      if (phoneInput.length > 1 && phoneInput.charAt(0) === '+') {
+          phoneInput = phoneInput.replace(/^(\+7)(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1($2)$3-$4-$5');
+      }
+
+      event.target.value = phoneInput;
+  });
+</script>
+
+
+<style>
+  .error {
+      margin-top: 5px;
+      font-size: 0.9rem;
+      color: red;
+  }
+
+  #phoneError {
+      display: none;
+      font-size: 0.9rem;
+      color: red;
+  }
+</style>
+
+
   <section class="footer">
     <div class="box-container">
       <div class="box">
@@ -869,10 +1404,103 @@
       <p class="mb-0" style="flex-grow: 1; text-align: center;">
         Created by <b>Zukhra &amp; Akniyet</b> | SE-2409 | A&amp;Z Store
       </p>
-      <span id="currentDateTimeFooter" style="font-size:1.5rem; text-align: right;"></span>
-    </div>
-  </footer>
 
-  <script defer src="main.js"></script>
+      <span id="currentDateTimeFooter" style="font-size:1.5rem; text-align: right;"></span>
+      
+ 
+<button id="showTimeButton" class="btn btn-dark">Show Current Time</button>
+
+</footer>
+
+
+<script>
+ 
+  function displayCurrentDateTime() {
+    let currentDate = new Date();
+    let formattedDate = currentDate.toLocaleString('en-US', {
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric', 
+      minute: 'numeric', 
+      second: 'numeric', 
+      hour12: true 
+    });
+
+
+    document.getElementById('currentDateTimeFooter').innerText = formattedDate;
+  }
+
+
+  document.getElementById('showTimeButton').addEventListener('click', function() {
+
+    document.getElementById('showTimeButton').style.display = 'none';
+
+
+    displayCurrentDateTime();
+
+
+    setInterval(displayCurrentDateTime, 1000);  
+  });
+</script>
+
+
+<style>
+
+  #showTimeButton {
+    background-color: rgb(32, 31, 31);  
+    color: white;  
+    padding: 10px 10px; 
+    font-size: 1.2rem;  
+    border: none;  
+    text-align: center;  
+    cursor: pointer;  
+    transition: background-color 0.3s ease;  
+  }
+
+  #showTimeButton:hover {
+    background-color: #ba3566;
+  }
+
+  #showTimeButton {
+    border-radius: 0;  
+  }
+</style>
+
+
+ <style>
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: #f1f1f1; 
+            z-index: 9999; 
+        }
+
+        #progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: hsl(333, 91%, 17%); 
+            transition: width 0.1s ease-in-out;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function() {
+            $(window).on('scroll', function() {
+                var scrollTop = $(window).scrollTop(); 
+                var documentHeight = $(document).height(); 
+                var windowHeight = $(window).height(); 
+                var scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100; 
+
+        
+                $('#progress-bar').css('width', scrollPercent + '%');
+            });
+        });
+    </script>
 </body>
 </html>
+

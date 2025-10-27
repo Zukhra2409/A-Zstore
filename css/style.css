@@ -583,3 +583,31 @@ mark.hl { background:#ffe08a; padding:0 .15em; border-radius:.2em; }
 #cartTotal{
   margin: 8px auto 12px !important;  /* подстрой при желании */
 }
+ .nav-item {
+    padding: 5px;
+  }
+
+
+  .focused {
+    background-color: #e80d94;
+    color: white;
+  }
+
+  
+  .dark-theme {
+    background-color: #121212; 
+    color: white; 
+  }
+
+ 
+  .dark-theme .navbar, .dark-theme .btn {
+    background-color: #333; 
+    color: #fff; 
+    border-color: #444; 
+  }
+
+  .dark-theme .btn-outline-dark {
+    background-color: #444; 
+    color: #fff; 
+    border-color: #555; 
+  }

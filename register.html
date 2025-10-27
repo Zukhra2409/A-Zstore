@@ -103,57 +103,96 @@
 </head>
 <body>
 
-  <div class="form-wrapper">
-    <div class="form-switch">
-      <button id="loginBtn" class="active">Login</button>
-      <button id="registerBtn">Register</button>
-    </div>
-
-    <form class="form active" id="loginForm">
-      <input type="text" id="loginUser" placeholder="Username">
-      <input type="password" id="loginPass" placeholder="Password">
-      <button type="submit">Login</button>
-    </form>
-
-    <form class="form" id="registerForm">
-      <input type="text" id="regUser" placeholder="Username">
-      <small class="error"></small>
-
-      <input type="email" id="regEmail" placeholder="Email">
-      <small class="error"></small>
-
-      <input type="password" id="regPass" placeholder="Password">
-      <small class="error"></small>
-
-      <input type="password" id="regConfirm" placeholder="Confirm Password">
-      <small class="error"></small>
-
-      <button type="submit">Register</button>
-      <p id="successMsg" class="success" hidden>Registration successful!</p>
-    </form>
+<div class="form-wrapper">
+  <div class="form-switch">
+    <button id="loginBtn" class="active">Login</button>
+    <button id="registerBtn">Register</button>
   </div>
 
-  <script>
-    const loginBtn = document.getElementById('loginBtn');
-    const registerBtn = document.getElementById('registerBtn');
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
 
-    loginBtn.addEventListener('click', () => {
-      loginForm.classList.add('active');
-      registerForm.classList.remove('active');
-      loginBtn.classList.add('active');
-      registerBtn.classList.remove('active');
-    });
+  <div id="notification" style="display: none;">
+    Successfully Registered!
+  </div>
 
-    registerBtn.addEventListener('click', () => {
-      registerForm.classList.add('active');
-      loginForm.classList.remove('active');
-      registerBtn.classList.add('active');
-      loginBtn.classList.remove('active');
-    });
 
-   
+  <form class="form active" id="loginForm">
+    <input type="text" placeholder="Username" required>
+    <input type="password" placeholder="Password" required>
+    <button type="submit" id="loginBtnSubmit" class="form-btn">Login</button>
+  </form>
+
+
+  <form class="form" id="registerForm">
+    <input type="text" placeholder="Username" required>
+    <input type="email" placeholder="Email" required>
+    <input type="password" placeholder="Password" required>
+    <button type="submit" id="registerBtnSubmit" class="form-btn">Register</button>
+  </form>
+</div>
+
+
+<script>
+  const loginBtn = document.getElementById("loginBtn");
+  const registerBtn = document.getElementById("registerBtn");
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+
+
+  loginBtn.addEventListener("click", () => {
+    loginForm.classList.add("active");
+    registerForm.classList.remove("active");
+    loginBtn.classList.add("active");
+    registerBtn.classList.remove("active");
+  });
+
+
+  registerBtn.addEventListener("click", () => {
+    registerForm.classList.add("active");
+    loginForm.classList.remove("active");
+    registerBtn.classList.add("active");
+    loginBtn.classList.remove("active");
+  });
+
+  
+  document.getElementById("registerForm").addEventListener("submit", function (event) {
+    event.preventDefault(); 
+
+
+    var notification = document.getElementById("notification");
+    notification.innerText = "Successfully Registered!";
+    notification.style.display = "block"; 
+
+ 
+    setTimeout(function () {
+      notification.style.opacity = 0; 
+      setTimeout(function () {
+        notification.style.display = "none"; 
+        notification.style.opacity = 1; 
+      }, 1000); 
+    }, 3000); 
+  });
+
+
+  document.getElementById("loginForm").addEventListener("submit", function (event) {
+    event.preventDefault(); 
+
+
+    var notification = document.getElementById("notification");
+    notification.innerText = "Successfully Logged In!";
+    notification.style.display = "block"; 
+
+    setTimeout(function () {
+      notification.style.opacity = 0;
+      setTimeout(function () {
+        notification.style.display = "none"; 
+        notification.style.opacity = 1; 
+      }, 1000); 
+    }, 3000); 
+  });
+</script>
+
+
+  <script> 
     const regEmail = document.getElementById('regEmail');
     const regPass = document.getElementById('regPass');
     const regConfirm = document.getElementById('regConfirm');

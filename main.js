@@ -1,4 +1,3 @@
-// ---------- Login / Register toggle ----------
 const loginBtn = document.getElementById('loginBtn');
 const registerBtn = document.getElementById('registerBtn');
 const loginForm = document.getElementById('loginForm');
@@ -20,7 +19,7 @@ if (loginBtn && registerBtn && loginForm && registerForm) {
   };
 }
 
-// ---------- Register form validation ----------
+
 const regEmail = document.getElementById('regEmail');
 const regPass = document.getElementById('regPass');
 const regConfirm = document.getElementById('regConfirm');
@@ -65,14 +64,12 @@ if (regForm) {
   });
 }
 
-// ---------- Simple background toggle ----------
 let isPink = false;
 function toggleBackgroundColor() {
   document.body.style.backgroundColor = isPink ? 'white' : '#FFD8F0';
   isPink = !isPink;
 }
 
-// ---------- Popup open/close ----------
 const openBtn = document.getElementById('openBtn');
 const popupForm = document.getElementById('popupForm');
 const overlay = document.getElementById('overlay');
@@ -89,7 +86,6 @@ if (openBtn && popupForm && overlay && closeBtn) {
   };
 }
 
-// ---------- Footer clock ----------
 window.addEventListener("load", () => {
   const footerDate = document.getElementById("currentDateTimeFooter");
   if (footerDate) {
@@ -112,7 +108,6 @@ window.addEventListener("load", () => {
   }
 });
 
-// ---------- Home: Shop now message toggle ----------
 document.addEventListener('DOMContentLoaded', function() {
   const shopNowButton = document.getElementById('shopNowBtn');
   const messageElement = document.getElementById('message');
@@ -130,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// ---------- Add to cart (mini total) ----------
 document.addEventListener("DOMContentLoaded", () => {
   const cart = [];
   const cartButtons = document.querySelectorAll(".cart-btn");
@@ -163,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ---------- Night mode ----------
 window.addEventListener("DOMContentLoaded", () => {
   const themeBtn = document.getElementById("themeBtn");
   const body = document.body;
@@ -190,7 +183,6 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// ---------- Navbar keyboard navigation ----------
 const menuItems = document.querySelectorAll('.nav-item');
 let currentIndex = 0;
 
@@ -214,7 +206,6 @@ document.addEventListener('keydown', function(event) {
 });
 updateFocus();
 
-// ---------- Popup open/close (selectors exist?) ----------
 const openBtn2 = document.querySelector('#openBtn');
 const closeBtn2 = document.querySelector('#closeBtn');
 const overlay2 = document.querySelector('#overlay');
@@ -225,7 +216,6 @@ if (openBtn2 && closeBtn2 && overlay2 && popup2) {
   overlay2.addEventListener('click', () => { popup2.style.display = 'none'; overlay2.style.display = 'none'; });
 }
 
-// ---------- Star rating ----------
 const allStar = document.querySelectorAll('.rating .star');
 const ratingValue = document.querySelector('.rating input');
 if (allStar.length && ratingValue) {
@@ -251,7 +241,6 @@ if (allStar.length && ratingValue) {
   });
 }
 
-// ---------- Contact form (safe) ----------
 const contactFormEl = document.getElementById('contactForm');
 if (contactFormEl) {
   contactFormEl.addEventListener('submit', function(event) {
@@ -313,7 +302,6 @@ if (contactFormEl) {
   }
 }
 
-// ---------- Extra background colors cycler ----------
 const backgroundColors = ['#D7BFDC', '#FFD8F0', '#ADD8E6', '#98FB98', '#FFFACD', '#FFB6C1', 'white'];
 let colorIndex = 0;
 function toggleBackgroundColorCycle() {
@@ -321,7 +309,6 @@ function toggleBackgroundColorCycle() {
   colorIndex = (colorIndex + 1) % backgroundColors.length;
 }
 
-// ---------- Optional "show time" button (safe) ----------
 function displayCurrentDateTime() {
   let currentDate = new Date();
   let formattedDate = currentDate.toLocaleString('en-US', {
@@ -340,18 +327,15 @@ if (showTimeBtn) {
   });
 }
 
-// === Products: Search + Highlight (все секции) ===
 window.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("searchInput") || document.getElementById("productSearch");
   const highlightBtn = document.getElementById("highlightBtn");
   const suggest = document.getElementById("searchSuggest");
   if (!input) return;
 
-  // все секции товаров и все карточки
   const sections = Array.from(document.querySelectorAll("section.products"));
   const cards = sections.flatMap(s => Array.from(s.querySelectorAll(".box, .card, .product-card")));
 
-  // фильтр + скрытие пустых секций
   function filterCards(q) {
     const needles = q.toLowerCase().split(/\s+/).filter(Boolean);
     sections.forEach(section => {
@@ -365,7 +349,6 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // подсказки из заголовков
   const names = Array.from(new Set(
     cards.map(c => (c.querySelector("h3, .card-title")?.textContent || "").trim()).filter(Boolean)
   ));
@@ -400,7 +383,6 @@ window.addEventListener("DOMContentLoaded", () => {
     renderSuggest(q);
   });
 
-  // ===== подсветка по ВСЕМ секциям =====
   const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
   function clearHighlights(){
@@ -458,10 +440,10 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-// ---- Copy to Clipboard (универсальный) ----
+
 function _textFrom(el) {
   if (!el) return "";
-  if ("value" in el) return el.value;                    // input/textarea
+  if ("value" in el) return el.value;
   if (el.getAttribute && el.getAttribute("contenteditable") === "true") {
     return el.innerText || el.textContent || "";
   }
@@ -472,7 +454,6 @@ document.addEventListener("click", async (e) => {
   const btn = e.target.closest(".copy-btn");
   if (!btn) return;
 
-  // Можно использовать data-copy или data-target
   const selector = btn.dataset.copy || btn.dataset.target;
   const el = selector ? document.querySelector(selector) : null;
   const text = _textFrom(el);
@@ -485,13 +466,11 @@ document.addEventListener("click", async (e) => {
     return setBack();
   }
 
-  // 1) Современный способ
   try {
     await navigator.clipboard.writeText(text);
     btn.textContent = "✔ Copied!";
     return setBack();
   } catch (_) {
-    // 2) Fallback для старых движков
     try {
       if (el && "select" in el) {
         const active = document.activeElement;
@@ -507,7 +486,6 @@ document.addEventListener("click", async (e) => {
         document.execCommand("copy");
         sel.removeAllRanges();
       } else {
-        // крайний случай: создаём временное поле
         const ta = document.createElement("textarea");
         ta.value = text;
         ta.style.position = "fixed";
@@ -526,7 +504,7 @@ document.addEventListener("click", async (e) => {
     }
   }
 });
-// === TASK 9: Lazy loading для изображений ===
+
 (function lazyLoadImages(){
   const imgs = Array.from(document.querySelectorAll('img.lazy[data-src]'));
   if (!imgs.length) return;
@@ -536,7 +514,6 @@ document.addEventListener("click", async (e) => {
     img.removeAttribute('data-src');
   };
 
-  // Современный способ
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
@@ -546,13 +523,12 @@ document.addEventListener("click", async (e) => {
         img.addEventListener('load', () => markLoaded(img), { once: true });
         obs.unobserve(img);
       });
-    }, { rootMargin: '200px 0px' }); // подгружаем чуть заранее
+    }, { rootMargin: '200px 0px' });
 
     imgs.forEach(img => io.observe(img));
     return;
   }
 
-  // Фоллбэк для старых браузеров
   let pending = imgs.slice();
   function loadVisible() {
     const limit = window.scrollY + window.innerHeight + 200;
@@ -563,7 +539,7 @@ document.addEventListener("click", async (e) => {
       if (top < limit) {
         img.src = img.dataset.src;
         img.addEventListener('load', () => markLoaded(img), { once: true });
-        return false; // убираем из списка
+        return false;
       }
       return true;
     });
@@ -576,6 +552,67 @@ document.addEventListener("click", async (e) => {
   window.addEventListener('scroll', loadVisible);
   window.addEventListener('resize', loadVisible);
   window.addEventListener('orientationchange', loadVisible);
-  loadVisible(); // первичный прогон
+  loadVisible();
 })();
+// === Task 9: Lazy Loading images ===
+document.addEventListener('DOMContentLoaded', () => {
+  const lazyImgs = Array.from(document.querySelectorAll('img.lazy'));
 
+  // Общее действие «вставить src и отметить как загруженную»
+  function reveal(img) {
+    const onLoad = () => img.classList.add('loaded');
+    if (img.complete) {
+      // иногда браузер уже подгрузил из кэша
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', onLoad, { once: true });
+    }
+    if (img.dataset.src)   { img.src   = img.dataset.src; }
+    if (img.dataset.srcset){ img.srcset= img.dataset.srcset; }
+
+    img.removeAttribute('data-src');
+    img.removeAttribute('data-srcset');
+  }
+
+  if ('IntersectionObserver' in window) {
+
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          reveal(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '200px 0px', 
+      threshold: 0.01
+    });
+
+    lazyImgs.forEach(img => io.observe(img));
+  } else {
+
+    const loadVisible = () => {
+      lazyImgs.forEach(img => {
+        if (!img.dataset.src) return;
+        const rect = img.getBoundingClientRect();
+        const buffer = 200; 
+        if (rect.top < window.innerHeight + buffer && rect.bottom > -buffer) {
+          reveal(img);
+        }
+      });
+
+      if (lazyImgs.every(img => !img.dataset.src)) {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onScroll);
+        window.removeEventListener('orientationchange', onScroll);
+      }
+    };
+    const onScroll = () => window.requestAnimationFrame(loadVisible);
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    window.addEventListener('orientationchange', onScroll);
+    loadVisible();
+  }
+});

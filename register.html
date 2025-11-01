@@ -3,18 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Register — A&Z Store</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="super.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <title>Login & Register</title>
+
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
       background: linear-gradient(to right, #ffe6f0, #fff);
-      height: 100vh;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-wrap {
+      flex: 1;
       display: flex;
       justify-content: center;  
-      align-items: center;      
+      align-items: center;
+      padding: 2rem;
     }
 
     .form-wrapper {
@@ -51,13 +63,13 @@
     }
 
     .form {
-      display: none; 
+      display: none;
       flex-direction: column;
       gap: 0.5rem;
     }
 
     .form.active {
-      display: flex; 
+      display: flex;
     }
 
     .form input {
@@ -67,7 +79,7 @@
       font-size: 1rem;
     }
 
-    .form button {
+    .form button[type="submit"] {
       padding: 1rem;
       border: none;
       border-radius: 0.5rem;
@@ -78,7 +90,7 @@
       margin-top: 0.5rem;
     }
 
-    .form button:hover {
+    .form button[type="submit"]:hover {
       background: #333;
     }
 
@@ -96,160 +108,83 @@
     }
 
     input.invalid {
-      border-color: #72131a;
+      border-color: #e63946;
       box-shadow: 0 0 4px rgba(230,57,70,0.3);
     }
   </style>
 </head>
 <body>
 
-<div class="form-wrapper">
-  <div class="form-switch">
-    <button id="loginBtn" class="active">Login</button>
-    <button id="registerBtn">Register</button>
-  </div>
-
-
-  <div id="notification" style="display: none;">
-    Successfully Registered!
-  </div>
-
-
-  <form class="form active" id="loginForm">
-    <input type="text" placeholder="Username" required>
-    <input type="password" placeholder="Password" required>
-    <button type="submit" id="loginBtnSubmit" class="form-btn">Login</button>
-  </form>
-
-
-  <form class="form" id="registerForm">
-    <input type="text" placeholder="Username" required>
-    <input type="email" placeholder="Email" required>
-    <input type="password" placeholder="Password" required>
-    <button type="submit" id="registerBtnSubmit" class="form-btn">Register</button>
-  </form>
+<div id="toast"
+     class="position-fixed bottom-0 end-0 m-3 alert alert-dark shadow"
+     style="display:none; z-index:9999; min-width:200px; max-width:260px; font-size:14px;">
 </div>
 
+<nav class="navbar navbar-expand-lg bg-white shadow border-bottom" style="padding:10px 0;">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html" style="color:#e84393; font-size:2rem;">A&Zstore<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
+        <li class="nav-item"><a class="nav-link active" href="register.html">Login</a></li>
+        <li class="nav-item ms-2">
+          <button id="themeBtn" class="btn btn-outline-dark btn-sm px-3">🌙 Night Mode</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-<script>
-  const loginBtn = document.getElementById("loginBtn");
-  const registerBtn = document.getElementById("registerBtn");
-  const loginForm = document.getElementById("loginForm");
-  const registerForm = document.getElementById("registerForm");
+<div class="page-wrap">
+  <div class="form-wrapper">
+    <div class="form-switch">
+      <button id="loginBtn" class="active">Login</button>
+      <button id="registerBtn">Register</button>
+    </div>
 
+    <form class="form active" id="loginForm">
+      <input type="text" id="loginUser" placeholder="Username">
+      <input type="password" id="loginPass" placeholder="Password">
+      <button type="submit">Login</button>
+    </form>
 
-  loginBtn.addEventListener("click", () => {
-    loginForm.classList.add("active");
-    registerForm.classList.remove("active");
-    loginBtn.classList.add("active");
-    registerBtn.classList.remove("active");
-  });
+    <form class="form" id="registerForm">
+      <input type="text" id="regUser" placeholder="Username">
+      <small class="error"></small>
 
+      <input type="email" id="regEmail" placeholder="Email">
+      <small class="error"></small>
 
-  registerBtn.addEventListener("click", () => {
-    registerForm.classList.add("active");
-    loginForm.classList.remove("active");
-    registerBtn.classList.add("active");
-    loginBtn.classList.remove("active");
-  });
+      <input type="password" id="regPass" placeholder="Password">
+      <small class="error"></small>
 
-  
-  document.getElementById("registerForm").addEventListener("submit", function (event) {
-    event.preventDefault(); 
+      <input type="password" id="regConfirm" placeholder="Confirm Password">
+      <small class="error"></small>
 
+      <button type="submit">Register</button>
+      <p id="successMsg" class="success" hidden>Registration successful!</p>
+    </form>
+  </div>
+</div>
 
-    var notification = document.getElementById("notification");
-    notification.innerText = "Successfully Registered!";
-    notification.style.display = "block"; 
+<footer class="bg-dark text-white text-center py-4 mt-auto">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <p class="mb-0 text-center">
+      Created by <b>Zukhra &amp; Akniyet</b> | SE-2409 | A&amp;Z Store
+    </p>
 
- 
-    setTimeout(function () {
-      notification.style.opacity = 0; 
-      setTimeout(function () {
-        notification.style.display = "none"; 
-        notification.style.opacity = 1; 
-      }, 1000); 
-    }, 3000); 
-  });
+    <span id="currentDateTimeFooter" style="font-size:1.4rem;"></span>
 
-
-  document.getElementById("loginForm").addEventListener("submit", function (event) {
-    event.preventDefault(); 
-
-
-    var notification = document.getElementById("notification");
-    notification.innerText = "Successfully Logged In!";
-    notification.style.display = "block"; 
-
-    setTimeout(function () {
-      notification.style.opacity = 0;
-      setTimeout(function () {
-        notification.style.display = "none"; 
-        notification.style.opacity = 1; 
-      }, 1000); 
-    }, 3000); 
-  });
-</script>
-
-
-  <script> 
-    const regEmail = document.getElementById('regEmail');
-    const regPass = document.getElementById('regPass');
-    const regConfirm = document.getElementById('regConfirm');
-    const regForm = document.getElementById('registerForm');
-    const successMsg = document.getElementById('successMsg');
-
-    function showError(input, message) {
-      const small = input.nextElementSibling;
-      small.textContent = message;
-      if (message) input.classList.add('invalid');
-      else input.classList.remove('invalid');
-    }
-
-    regForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      successMsg.hidden = true;
-
-      let valid = true;
-
-  
-      const emailVal = regEmail.value.trim();
-      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
-      if (!emailValid) {
-        showError(regEmail, 'Enter a valid email address');
-        valid = false;
-      } else showError(regEmail, '');
-
-     
-      const passVal = regPass.value.trim();
-      if (passVal.length < 6) {
-        showError(regPass, 'Password must be at least 6 characters');
-        valid = false;
-      } else showError(regPass, '');
-
-      if (regConfirm.value.trim() !== passVal || regConfirm.value === '') {
-        showError(regConfirm, 'Passwords do not match');
-        valid = false;
-      } else showError(regConfirm, '');
-
-
-      const userVal = document.getElementById('regUser').value.trim();
-      const userInput = document.getElementById('regUser');
-      if (userVal === '') {
-        showError(userInput, 'Username is required');
-        valid = false;
-      } else showError(userInput, '');
-
- 
-      if (valid) {
-        regForm.reset();
-        successMsg.hidden = false;
-      }
-    });
-  </script>
-<footer class="text-center py-3 bg-light border-top">
-  <p id="currentDateTimeFooter" style="margin: 0; font-size: 1.2rem; color:#666;"></p>
+    <button id="showTimeButton" class="btn btn-dark">Show Current Time</button>
+  </div>
 </footer>
+
 <script src="main.js"></script>
 </body>
 </html>

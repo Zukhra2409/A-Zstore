@@ -754,18 +754,18 @@ section {
 body {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
-/* ===== Night Mode base ===== */
+
 html, body {
   transition: background-color .35s ease, color .35s ease;
 }
 
-/* Тёмный фон и текст */
+
 body.dark-mode {
   background-color: #121212;
   color: #f1f3f5;
 }
 
-/* Шапка/карточки/блоки на тёмном фоне */
+
 body.dark-mode .navbar,
 body.dark-mode .card,
 body.dark-mode .order-container,
@@ -779,7 +779,7 @@ body.dark-mode section {
   color: #f1f3f5 !important;
 }
 
-/* Заголовки и ссылки */
+
 body.dark-mode h1, 
 body.dark-mode h2, 
 body.dark-mode h3, 
@@ -789,12 +789,12 @@ body.dark-mode a {
   color: #f1f3f5 !important;
 }
 
-/* Кнопка темы меняет контур автоматически */
+
 body.dark-mode .btn-outline-dark {
   color: #fff !important;
   border-color: #fff !important;
 }
-/* === Кнопка Night Mode — общий стиль === */
+
 #themeBtn {
   background: #e84393;
   color: #fff;
@@ -843,7 +843,6 @@ body.dark-mode .btn-outline-dark {
   font-size: 1.3rem;
 }
 
-/* 🌙 Dark mode version */
 body.dark-mode .cart-total {
   background: linear-gradient(135deg, #2c2c2c, #1c1c1c);
   border: 2px solid #ff80bf;
@@ -881,3 +880,120 @@ body.dark-mode .cart-total {
 }
 body.dark-mode .cart-text  { color:#f1f3f5; }
 body.dark-mode .cart-amount{ color:#ff9fd9; }
+.faq-section {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 20px;
+  font-family: "Arial", sans-serif;
+}
+.faq-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+
+.faq-item {
+  border-bottom: 1px solid #e2e2e2;
+  overflow: hidden;
+}
+
+
+.faq-question {
+  width: 100%;
+  background: #fff;
+  border: none;
+  outline: none;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 18px 10px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.3s;
+}
+.faq-question:hover {
+  background: #fafafa;
+}
+
+
+.faq-question::after {
+  content: "▾";
+  position: absolute;
+  right: 15px;
+  font-size: 16px;
+  color: #777;
+  transition: transform 0.3s ease;
+}
+.faq-item.active .faq-question::after {
+  transform: rotate(180deg);
+}
+
+
+.faq-answer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+.faq-answer p {
+  margin: 0;
+  padding: 0 0 15px 10px;
+  color: #444;
+  line-height: 1.6;
+}
+
+
+.faq-item.active .faq-answer {
+  max-height: 300px;
+  opacity: 1;
+}
+/* ===== Register page dark mode fix ===== */
+body.dark-mode {
+  /* убиваем розовый градиент */
+  background: #000 !important;
+  background-image: none !important;
+  color: #f1f3f5 !important;
+}
+
+/* сам белый бокс формы делаем тёмным */
+body.dark-mode .form-wrapper {
+  background-color: #1b1b1b !important;
+  color: #f1f3f5 !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6) !important;
+  border-radius: 1rem;
+}
+
+/* инпуты внутри формы в дарк моде */
+body.dark-mode .form-wrapper input {
+  background: #2a2a2a !important;
+  color: #fff !important;
+  border: 1px solid #555 !important;
+}
+
+/* кнопка Login / Register остаётся розовой 💖 */
+body.dark-mode .form-wrapper button[type="submit"] {
+  background: #e84393 !important;
+  color: #fff !important;
+}
+
+/* ошибки и success цвета тоже видны в тёмном фоне */
+body.dark-mode .form-wrapper .error {
+  color: #ff6b6b !important;
+}
+body.dark-mode .form-wrapper .success {
+  color: #2ecc71 !important;
+}
+/* табы Login / Register сверху формы в тёмной теме */
+body.dark-mode #loginBtn,
+body.dark-mode #registerBtn {
+  color: #fff !important;
+}
+
+/* подчёркнутый активный таб оставляем розовым */
+body.dark-mode #loginBtn.active,
+body.dark-mode #registerBtn.active {
+  color: #e84393 !important;
+  border-bottom: 2px solid #e84393 !important;
+}

@@ -1,305 +1,121 @@
+/* ==========================
+   0. LOGIN / REGISTER TOGGLE
+   ========================== */
 const loginBtn = document.getElementById('loginBtn');
 const registerBtn = document.getElementById('registerBtn');
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 
 if (loginBtn && registerBtn && loginForm && registerForm) {
-  loginBtn.onclick = () => {
+  loginBtn.addEventListener('click', () => {
     loginBtn.classList.add('active');
     registerBtn.classList.remove('active');
     loginForm.classList.add('active');
     registerForm.classList.remove('active');
-  };
+  });
 
-  registerBtn.onclick = () => {
+  registerBtn.addEventListener('click', () => {
     registerBtn.classList.add('active');
     loginBtn.classList.remove('active');
     registerForm.classList.add('active');
     loginForm.classList.remove('active');
-  };
+  });
 }
 
-
+/* ==========================
+   1. REGISTER FORM VALIDATION (REGISTER PAGE)
+   ========================== */
+const regForm = document.getElementById('registerForm');
 const regEmail = document.getElementById('regEmail');
 const regPass = document.getElementById('regPass');
 const regConfirm = document.getElementById('regConfirm');
-const regForm = document.getElementById('registerForm');
 const successMsg = document.getElementById('successMsg');
 
 if (regForm) {
-  function showError(input, message) {
-    const small = input.parentElement.querySelector('.error');
-    if (small) small.textContent = message;
-    if (message) input.classList.add('invalid');
-    else input.classList.remove('invalid');
+  function showRegError(inputEl, msg) {
+    const errBox = inputEl?.parentElement?.querySelector('.error');
+    if (errBox) errBox.textContent = msg || '';
+    if (msg) {
+      inputEl.classList.add('invalid');
+    } else {
+      inputEl.classList.remove('invalid');
+    }
   }
 
-  regForm.addEventListener('submit', function (e) {
+  regForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (successMsg) successMsg.hidden = true;
 
-    let valid = true;
+    let ok = true;
 
-    const emailVal = regEmail.value.trim();
+    // email
+    const emailVal = (regEmail?.value || '').trim();
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
     if (!emailValid) {
-      showError(regEmail, 'Enter a valid email address');
-      valid = false;
-    } else showError(regEmail, '');
+      ok = false;
+      showRegError(regEmail, 'Enter a valid email address');
+    } else showRegError(regEmail, '');
 
-    const passVal = regPass.value.trim();
+    // password
+    const passVal = (regPass?.value || '').trim();
     if (passVal.length < 6) {
-      showError(regPass, 'Password must be at least 6 characters');
-      valid = false;
-    } else showError(regPass, '');
+      ok = false;
+      showRegError(regPass, 'Password must be at least 6 characters');
+    } else showRegError(regPass, '');
 
-    if (regConfirm.value.trim() !== passVal || regConfirm.value === '') {
-      showError(regConfirm, 'Passwords do not match');
-      valid = false;
-    } else showError(regConfirm, '');
+    // confirm password
+    const confirmVal = (regConfirm?.value || '').trim();
+    if (!confirmVal || confirmVal !== passVal) {
+      ok = false;
+      showRegError(regConfirm, 'Passwords do not match');
+    } else showRegError(regConfirm, '');
 
-    if (!valid) return;
+    if (!ok) return;
+
+    // success
     regForm.reset();
     if (successMsg) successMsg.hidden = false;
   });
 }
 
+/* =====================================================================================
+   2. HERO "SHOP NOW" MESSAGE TOGGLER (INDEX HOME HERO)
+   ===================================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const shopNowButton = document.getElementById('shopNowBtn');
+  const messageEl = document.getElementById('message'); // текст под заголовком hero
+
+  if (!shopNowButton || !messageEl) return;
+
+  // берём оригинальный текст как он написан в HTML
+  const originalText = messageEl.innerHTML.trim();
+  let showingOffer = false;
+
+  shopNowButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if (!showingOffer) {
+      messageEl.innerHTML =
+        "Special Offer! 💖 Use code <b>LOVE10</b> at checkout for <b>10% OFF</b> today!";
+      messageEl.style.color = '#ff79c6';
+      messageEl.style.fontWeight = '500';
+      showingOffer = true;
+    } else {
+      messageEl.innerHTML = originalText;
+      messageEl.style.color = '';
+      messageEl.style.fontWeight = '';
+      showingOffer = false;
+    }
+  });
+});
+
+/* ==========================
+   3. SIMPLE BACKGROUND COLOR TOGGLE HELPERS (опционально)
+   ========================== */
 let isPink = false;
 function toggleBackgroundColor() {
   document.body.style.backgroundColor = isPink ? 'white' : '#FFD8F0';
   isPink = !isPink;
-}
-
-const openBtn = document.getElementById('openBtn');
-const popupForm = document.getElementById('popupForm');
-const overlay = document.getElementById('overlay');
-const closeBtn = document.getElementById('closeBtn');
-
-if (openBtn && popupForm && overlay && closeBtn) {
-  openBtn.onclick = () => {
-    popupForm.style.display = 'flex';
-    overlay.style.display = 'flex';
-  };
-  closeBtn.onclick = overlay.onclick = () => {
-    popupForm.style.display = 'none';
-    overlay.style.display = 'none';
-  };
-}
-
-window.addEventListener("load", () => {
-  const footerDate = document.getElementById("currentDateTimeFooter");
-  if (footerDate) {
-    function displayCurrentDateTime() {
-      const now = new Date();
-      const formatted = now.toLocaleString("en-US", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-      });
-      footerDate.textContent = formatted;
-    }
-    displayCurrentDateTime();
-    setInterval(displayCurrentDateTime, 1000);
-  }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  const shopNowButton = document.getElementById('shopNowBtn');
-  const messageElement = document.getElementById('message');
-
-  if (shopNowButton && messageElement) {
-    shopNowButton.addEventListener('click', function(event) {
-      event.preventDefault();
-      const orig = "Our store is created to help you express your feelings and give happiness to dear women. Every gift here is filled with love, tenderness, and care.";
-      if (messageElement.textContent === orig) {
-        messageElement.innerHTML = "Special Offer:<br>Get 20% off on your first purchase,<br>use code 'PRETTYWOMEN'!";
-      } else {
-        messageElement.innerHTML = orig;
-      }
-    });
-  }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const cart = [];
-  const cartButtons = document.querySelectorAll(".cart-btn");
-  const totalDisplayContainer = document.getElementById("cartTotal");
-  const totalAmountEl =
-    document.getElementById("cartAmount") ||
-    (totalDisplayContainer && totalDisplayContainer.querySelector("b"));
-
-  if (cartButtons.length > 0 && totalAmountEl) {
-    cartButtons.forEach(btn => {
-      btn.addEventListener("click", e => {
-        e.preventDefault();
-
-        const productBox = e.target.closest(".box");
-        const name = productBox?.querySelector("h3")?.textContent || "Unknown";
-        const priceText = productBox?.querySelector(".price")?.textContent || "$12";
-        const price = parseFloat(priceText.replace(/[^0-9.]/g, "")) || 12;
-
-        cart.push({ name, price });
-        const total = cart.reduce((s, i) => s + i.price, 0);
-        totalAmountEl.textContent = `$${total.toFixed(2)}`;
-        e.target.textContent = "✓ Added!";
-        e.target.style.backgroundColor = "#e84393";
-        setTimeout(() => {
-          e.target.textContent = "add to cart";
-          e.target.style.backgroundColor = "";
-        }, 900);
-      });
-    });
-  }
-});
-
-window.addEventListener("DOMContentLoaded", () => {
-  const themeBtn = document.getElementById("themeBtn");
-  const body = document.body;
-  const THEME_KEY = "theme";
-
-  if (!themeBtn) return;
-
-  function applyTheme(mode) {
-    const isDark = mode === "dark";
-    body.classList.toggle("dark-mode", isDark);
-    themeBtn.textContent = isDark ? "☀️ Day Mode" : "🌙 Night Mode";
-  }
-
-  let saved = localStorage.getItem(THEME_KEY);
-  if (!saved) {
-    saved = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-  applyTheme(saved);
-
-  themeBtn.addEventListener("click", () => {
-    const newMode = body.classList.contains("dark-mode") ? "light" : "dark";
-    localStorage.setItem(THEME_KEY, newMode);
-    applyTheme(newMode);
-  });
-});
-
-const menuItems = document.querySelectorAll('.nav-item');
-let currentIndex = 0;
-
-function updateFocus() {
-  menuItems.forEach(item => item.classList.remove('focused'));
-  if (!menuItems.length) return;
-  menuItems[currentIndex].classList.add('focused');
-  const a = menuItems[currentIndex].querySelector('a');
-  if (a) a.focus();
-}
-
-document.addEventListener('keydown', function(event) {
-  if (!menuItems.length) return;
-  if (event.key === 'ArrowRight') {
-    currentIndex = (currentIndex + 1) % menuItems.length;
-    updateFocus();
-  } else if (event.key === 'ArrowLeft') {
-    currentIndex = (currentIndex - 1 + menuItems.length) % menuItems.length;
-    updateFocus();
-  }
-});
-updateFocus();
-
-const openBtn2 = document.querySelector('#openBtn');
-const closeBtn2 = document.querySelector('#closeBtn');
-const overlay2 = document.querySelector('#overlay');
-const popup2 = document.querySelector('#popupForm');
-if (openBtn2 && closeBtn2 && overlay2 && popup2) {
-  openBtn2.addEventListener('click', () => { popup2.style.display = 'block'; overlay2.style.display = 'block'; });
-  closeBtn2.addEventListener('click', () => { popup2.style.display = 'none'; overlay2.style.display = 'none'; });
-  overlay2.addEventListener('click', () => { popup2.style.display = 'none'; overlay2.style.display = 'none'; });
-}
-
-const allStar = document.querySelectorAll('.rating .star');
-const ratingValue = document.querySelector('.rating input');
-if (allStar.length && ratingValue) {
-  allStar.forEach((item, idx) => {
-    item.addEventListener('click', function () {
-      let click = 0;
-      ratingValue.value = idx + 1;
-
-      allStar.forEach(i => {
-        i.classList.replace('bxs-star', 'bx-star');
-        i.classList.remove('active');
-      });
-
-      for (let i = 0; i <= idx; i++) {
-        allStar[i].classList.replace('bx-star', 'bxs-star');
-        allStar[i].classList.add('active');
-      }
-      for (let i = idx + 1; i < allStar.length; i++) {
-        allStar[i].style.setProperty('--i', click);
-        click++;
-      }
-    });
-  });
-}
-
-const contactFormEl = document.getElementById('contactForm');
-if (contactFormEl) {
-  contactFormEl.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    document.querySelectorAll('.error').forEach(message => message.remove());
-
-    const name = document.getElementById('name')?.value || "";
-    const email = document.getElementById('email')?.value || "";
-    const phoneEl = document.getElementById('phone');
-    const message = document.getElementById('message')?.value || "";
-
-    let isValid = true;
-
-    const namePattern = /^[A-Za-z\s]+$/;
-    if (!name.trim() || !namePattern.test(name)) {
-      isValid = false;
-      showError('name', 'Please enter a valid name (letters only, no numbers).');
-    }
-
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(email)) {
-      isValid = false;
-      showError('email', 'Please enter a valid email.');
-    }
-
-    if (phoneEl) {
-      const phonePattern = /^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/;
-      const phoneErr = document.getElementById('phoneError');
-      if (!phonePattern.test(phoneEl.value)) {
-        isValid = false;
-        if (phoneErr) phoneErr.style.display = 'inline';
-      } else {
-        if (phoneErr) phoneErr.style.display = 'none';
-      }
-    }
-
-    if (!message.trim()) {
-      isValid = false;
-      showError('message', 'Message is required.');
-    }
-
-    if (isValid) {
-      alert('Form submitted successfully!');
-    } else {
-      alert('Complete everything, it\'s important!');
-    }
-  });
-
-  const phoneEl = document.getElementById('phone');
-  if (phoneEl) {
-    phoneEl.addEventListener('input', function(event) {
-      let phoneInput = event.target.value.replace(/[^\d+]/g, '');
-      if (phoneInput.length > 1 && phoneInput.charAt(0) === '+') {
-        phoneInput = phoneInput.replace(/^(\+7)(\d{3})(\d{3})(\d{2})(\d{2})$/, '$1($2)$3-$4-$5');
-      }
-      event.target.value = phoneInput;
-    });
-  }
 }
 
 const backgroundColors = ['#D7BFDC', '#FFD8F0', '#ADD8E6', '#98FB98', '#FFFACD', '#FFB6C1', 'white'];
@@ -309,131 +125,502 @@ function toggleBackgroundColorCycle() {
   colorIndex = (colorIndex + 1) % backgroundColors.length;
 }
 
-function displayCurrentDateTime() {
-  let currentDate = new Date();
-  let formattedDate = currentDate.toLocaleString('en-US', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-    hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true
+/* ==========================
+   4. CART ("add to cart" + total)
+   ========================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const cart = [];
+
+  const cartButtons = document.querySelectorAll('.cart-btn');
+  const totalAmountEl =
+    document.getElementById('cartAmount') ||
+    document.querySelector('#cartTotal b');
+
+  if (cartButtons.length && totalAmountEl) {
+    cartButtons.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const productBox = e.target.closest('.box');
+        const name =
+          productBox?.querySelector('h3')?.textContent?.trim() || 'Unknown';
+        const priceText =
+          productBox?.querySelector('.price')?.textContent || '$12';
+        const price = parseFloat(priceText.replace(/[^0-9.]/g, '')) || 12;
+
+        cart.push({ name, price });
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+        totalAmountEl.textContent = `$${total.toFixed(2)}`;
+
+        btn.textContent = '✓ Added!';
+        btn.style.backgroundColor = '#e84393';
+        setTimeout(() => {
+          btn.textContent = 'add to cart';
+          btn.style.backgroundColor = '';
+        }, 900);
+      });
+    });
+  }
+});
+
+/* ==========================
+   5. THEME TOGGLE (Light / Dark) + localStorage
+   ========================== */
+window.addEventListener('DOMContentLoaded', () => {
+  const themeBtn = document.getElementById('themeBtn');
+  const body = document.body;
+  const THEME_KEY = 'theme';
+
+  if (!themeBtn) return;
+
+  function applyTheme(mode) {
+    const isDark = mode === 'dark';
+    body.classList.toggle('dark-mode', isDark);
+    themeBtn.textContent = isDark ? '☀️ Light Mode' : '🌙 Night Mode';
+  }
+
+  let saved = localStorage.getItem(THEME_KEY);
+  if (!saved) {
+    saved = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  }
+  applyTheme(saved);
+
+  themeBtn.addEventListener('click', () => {
+    const newMode = body.classList.contains('dark-mode') ? 'light' : 'dark';
+    localStorage.setItem(THEME_KEY, newMode);
+    applyTheme(newMode);
   });
-  const el = document.getElementById('currentDateTimeFooter');
-  if (el) el.innerText = formattedDate;
+});
+
+/* ==========================
+   6. KEYBOARD NAVIGATION по меню (стрелки ← →)
+   ========================== */
+const menuItems = document.querySelectorAll('.nav-item');
+let navCurrentIndex = 0;
+
+function updateNavFocus() {
+  menuItems.forEach((item) => item.classList.remove('focused'));
+  if (!menuItems.length) return;
+  menuItems[navCurrentIndex].classList.add('focused');
+  const link = menuItems[navCurrentIndex].querySelector('a');
+  if (link) link.focus();
 }
+if (menuItems.length) {
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') {
+      navCurrentIndex = (navCurrentIndex + 1) % menuItems.length;
+      updateNavFocus();
+    } else if (event.key === 'ArrowLeft') {
+      navCurrentIndex =
+        (navCurrentIndex - 1 + menuItems.length) % menuItems.length;
+      updateNavFocus();
+    }
+  });
+  updateNavFocus();
+}
+
+/* ==========================
+   7. POPUP (Contact / Review modal + рейтинг звёздами)
+   ========================== */
+(function initPopup() {
+  const openBtn = document.querySelector('#openBtn');
+  const closeBtn = document.querySelector('#closeBtn');
+  const overlay = document.querySelector('#overlay');
+  const popup = document.querySelector('#popupForm');
+  const submitBtn = document.querySelector('#submitBtn');
+
+  function openPopup() {
+    if (!popup || !overlay) return;
+    popup.style.display = 'block';
+    overlay.style.display = 'block';
+  }
+  function closePopup() {
+    if (!popup || !overlay) return;
+    popup.style.display = 'none';
+    overlay.style.display = 'none';
+  }
+
+  if (openBtn && overlay && popup) {
+    openBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPopup();
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closePopup();
+    });
+  }
+
+  if (overlay) {
+    overlay.addEventListener('click', closePopup);
+  }
+
+  // звёзды рейтинга
+  const allStar = document.querySelectorAll('.rating .star');
+  const ratingValueInput = document.querySelector('.rating input');
+  if (allStar.length && ratingValueInput) {
+    allStar.forEach((star, idx) => {
+      star.addEventListener('click', () => {
+        ratingValueInput.value = String(idx + 1);
+
+        allStar.forEach((s, i) => {
+          if (i <= idx) {
+            s.classList.remove('bx-star');
+            s.classList.add('bxs-star', 'active');
+          } else {
+            s.classList.remove('bxs-star', 'active');
+            s.classList.add('bx-star');
+          }
+        });
+      });
+    });
+  }
+
+  // отправка попапа
+  if (submitBtn) {
+    submitBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const nameVal =
+        document.getElementById('popupName')?.value.trim() || '';
+      const emailVal =
+        document.getElementById('popupEmail')?.value.trim() || '';
+      const ratingVal =
+        document.querySelector('.rating input')?.value || '';
+
+      if (!nameVal || !emailVal || !ratingVal) {
+        alert('Please fill all fields and pick stars ⭐');
+        return;
+      }
+
+      alert('Thank you for your feedback! 💖');
+
+      const nameInput = document.getElementById('popupName');
+      const emailInput = document.getElementById('popupEmail');
+      if (nameInput) nameInput.value = '';
+      if (emailInput) emailInput.value = '';
+      if (ratingValueInput) ratingValueInput.value = '';
+
+      closePopup();
+    });
+  }
+})();
+
+/* ==========================
+   8. CONTACT FORM VALIDATION (форма "contact us")
+   ========================== */
+const contactFormEl = document.getElementById('contactForm');
+if (contactFormEl) {
+  contactFormEl.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    // чистим старые тексты ошибок
+    contactFormEl.querySelectorAll('.error').forEach((m) => {
+      m.textContent = '';
+    });
+
+    // берём поля ТОЛЬКО внутри contactForm (важно, потому что у тебя id="message" есть и в hero)
+    const nameInput = contactFormEl.querySelector('#name');
+    const emailInput = contactFormEl.querySelector('#email');
+    const phoneInput = contactFormEl.querySelector('#phone');
+    const msgInput = contactFormEl.querySelector('#message');
+
+    let isValid = true;
+
+    // name
+    const nameVal = (nameInput?.value || '').trim();
+    const namePattern = /^[A-Za-z\s]+$/;
+    if (!nameVal || !namePattern.test(nameVal)) {
+      isValid = false;
+      setInlineError('name', 'Please enter a valid name (letters only, no numbers).');
+    }
+
+    // email
+    const emailVal = (emailInput?.value || '').trim();
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(emailVal)) {
+      isValid = false;
+      setInlineError('email', 'Please enter a valid email.');
+    }
+
+    // phone
+    if (phoneInput) {
+      const phoneErr = contactFormEl.querySelector('#phoneError');
+      const phonePattern = /^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/;
+      if (!phonePattern.test(phoneInput.value)) {
+        isValid = false;
+        if (phoneErr) phoneErr.style.display = 'inline';
+      } else {
+        if (phoneErr) phoneErr.style.display = 'none';
+      }
+    }
+
+    // message
+    const msgVal = (msgInput?.value || '').trim();
+    if (!msgVal) {
+      isValid = false;
+      setInlineError('message', 'Message is required.');
+    }
+
+    if (!isValid) return;
+
+    alert('Your message was sent. Thank you!');
+    contactFormEl.reset();
+  });
+
+  // маска телефона (формат +7(777)123-45-67)
+  const phoneInput = contactFormEl.querySelector('#phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', (event) => {
+      let digits = event.target.value.replace(/[^\d+]/g, '');
+
+      const match = digits.match(/^(\+7)?(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2}).*$/);
+      if (match) {
+        const [, plus7, p1, p2, p3, p4] = match;
+        let formatted = '';
+        if (plus7) formatted += plus7;
+        if (p1) formatted += '(' + p1;
+        if (p1 && p1.length === 3) formatted += ')';
+        if (p2) formatted += p2;
+        if (p2 && p2.length === 3) formatted += '-';
+        if (p3) formatted += p3;
+        if (p3 && p3.length === 2) formatted += '-';
+        if (p4) formatted += p4;
+        event.target.value = formatted;
+      } else {
+        event.target.value = digits;
+      }
+    });
+  }
+
+  // helper чтобы показать текст ошибки под инпутом
+  function setInlineError(inputId, text) {
+    const field = contactFormEl.querySelector('#' + inputId);
+    if (!field) return;
+    let err = field.parentElement.querySelector('.error');
+    if (!err) {
+      err = document.createElement('small');
+      err.className = 'error';
+      field.parentElement.appendChild(err);
+    }
+    err.textContent = text;
+  }
+}
+
+/* ==========================
+   9. FOOTER CLOCK (кнопка Show time)
+   ========================== */
+function displayCurrentDateTime() {
+  const target = document.getElementById('currentDateTimeFooter');
+  if (!target) return;
+
+  const now = new Date();
+  const formatted = now.toLocaleString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true,
+  });
+
+  target.innerText = formatted;
+}
+
 const showTimeBtn = document.getElementById('showTimeButton');
 if (showTimeBtn) {
-  showTimeBtn.addEventListener('click', function() {
+  showTimeBtn.addEventListener('click', () => {
     showTimeBtn.style.display = 'none';
     displayCurrentDateTime();
     setInterval(displayCurrentDateTime, 1000);
   });
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("searchInput") || document.getElementById("productSearch");
-  const highlightBtn = document.getElementById("highlightBtn");
-  const suggest = document.getElementById("searchSuggest");
+/* ==========================
+   10. SEARCH / FILTER / HIGHLIGHT / SUGGEST
+   ========================== */
+document.addEventListener('DOMContentLoaded', () => {
+  const input =
+    document.getElementById('searchInput') ||
+    document.getElementById('productSearch');
+  const highlightBtn = document.getElementById('highlightBtn');
+  const suggestBox = document.getElementById('searchSuggest');
+
   if (!input) return;
 
-  const sections = Array.from(document.querySelectorAll("section.products"));
-  const cards = sections.flatMap(s => Array.from(s.querySelectorAll(".box, .card, .product-card")));
+  const productSections = Array.from(
+    document.querySelectorAll('section.products')
+  );
 
-  function filterCards(q) {
-    const needles = q.toLowerCase().split(/\s+/).filter(Boolean);
-    sections.forEach(section => {
-      let visible = 0;
-      section.querySelectorAll(".box, .card, .product-card").forEach(card => {
-        const ok = !needles.length || needles.every(n => card.textContent.toLowerCase().includes(n));
-        card.style.display = ok ? "" : "none";
-        if (ok) visible++;
-      });
-      section.style.display = visible ? "" : "none";
+  function getAllCards() {
+    return productSections.flatMap((section) =>
+      Array.from(section.querySelectorAll('.box, .card, .product-card'))
+    );
+  }
+
+  function filterCards(query) {
+    const words = query
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(Boolean);
+
+    productSections.forEach((section) => {
+      let visibleCount = 0;
+      section
+        .querySelectorAll('.box, .card, .product-card')
+        .forEach((card) => {
+          const text = card.textContent.toLowerCase();
+          const ok = !words.length || words.every((w) => text.includes(w));
+          card.style.display = ok ? '' : 'none';
+          if (ok) visibleCount++;
+        });
+      section.style.display = visibleCount ? '' : 'none';
     });
   }
 
-  const names = Array.from(new Set(
-    cards.map(c => (c.querySelector("h3, .card-title")?.textContent || "").trim()).filter(Boolean)
-  ));
+  // список названий продуктов для подсказки
+  const productNames = Array.from(
+    new Set(
+      getAllCards()
+        .map((c) => {
+          const title =
+            c.querySelector('h3, .card-title')?.textContent?.trim() || '';
+          return title;
+        })
+        .filter(Boolean)
+    )
+  );
 
-  function renderSuggest(q){
-    if (!suggest) return;
-    suggest.innerHTML = "";
-    q = q.trim().toLowerCase();
-    if (!q) { suggest.style.display = "none"; return; }
-    const items = names.filter(n => n.toLowerCase().includes(q)).slice(0,6);
-    if (!items.length) { suggest.style.display = "none"; return; }
-    suggest.style.display = "block";
-    items.forEach(n=>{
-      const li = document.createElement("li");
-      li.className = "list-group-item suggest-item";
-      li.style.cursor = "pointer";
-      li.textContent = n;
-      li.addEventListener("click", ()=>{
-        input.value = n;
-        suggest.style.display = "none";
-        filterCards(n);
+  function renderSuggest(query) {
+    if (!suggestBox) return;
+    suggestBox.innerHTML = '';
+
+    const q = query.trim().toLowerCase();
+    if (!q) {
+      suggestBox.style.display = 'none';
+      return;
+    }
+
+    const matches = productNames
+      .filter((name) => name.toLowerCase().includes(q))
+      .slice(0, 6);
+
+    if (!matches.length) {
+      suggestBox.style.display = 'none';
+      return;
+    }
+
+    suggestBox.style.display = 'block';
+
+    matches.forEach((name) => {
+      const li = document.createElement('li');
+      li.className = 'list-group-item suggest-item';
+      li.style.cursor = 'pointer';
+      li.textContent = name;
+
+      li.addEventListener('click', () => {
+        input.value = name;
+        suggestBox.style.display = 'none';
+        filterCards(name);
         clearHighlights();
-        doHighlight(n);
+        doHighlight(name);
       });
-      suggest.appendChild(li);
+
+      suggestBox.appendChild(li);
     });
   }
 
-  input.addEventListener("input", () => {
+  // фильтр при вводе текста
+  input.addEventListener('input', () => {
     const q = input.value.trim();
     filterCards(q);
     renderSuggest(q);
   });
 
-  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // ================= highlight logic =================
+  function escapeRegex(str) {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
 
-  function clearHighlights(){
-    sections.forEach(root => {
-      root.querySelectorAll("mark.hl").forEach(mark => {
-        const t = document.createTextNode(mark.textContent);
-        mark.replaceWith(t);
-        t.parentElement?.normalize?.();
+  function clearHighlights() {
+    productSections.forEach((section) => {
+      section.querySelectorAll('mark.hl').forEach((mark) => {
+        const textNode = document.createTextNode(mark.textContent);
+        mark.replaceWith(textNode);
+        if (textNode.parentElement && textNode.parentElement.normalize) {
+          textNode.parentElement.normalize();
+        }
       });
     });
   }
 
-  function doHighlight(q){
+  function doHighlight(q) {
     if (!q) return;
-    const re = new RegExp(esc(q), "gi");
-    sections.forEach(root => {
-      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-        acceptNode(node){
-          if (!node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-          const p = node.parentElement?.tagName;
-          return (p && !["SCRIPT","STYLE","MARK"].includes(p))
-            ? NodeFilter.FILTER_ACCEPT
-            : NodeFilter.FILTER_REJECT;
+    const re = new RegExp(escapeRegex(q), 'gi');
+
+    productSections.forEach((section) => {
+      const walker = document.createTreeWalker(
+        section,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode(node) {
+            const p = node.parentElement?.tagName;
+            if (!p) return NodeFilter.FILTER_REJECT;
+            if (['SCRIPT', 'STYLE', 'MARK'].includes(p)) {
+              return NodeFilter.FILTER_REJECT;
+            }
+            return NodeFilter.FILTER_ACCEPT;
+          },
         }
-      });
+      );
+
       const nodes = [];
       while (walker.nextNode()) nodes.push(walker.currentNode);
 
-      nodes.forEach(node => {
+      nodes.forEach((node) => {
         const text = node.nodeValue;
-        if (!re.test(text)) return;
+        if (!re.test(text)) {
+          re.lastIndex = 0;
+          return;
+        }
         re.lastIndex = 0;
 
         const frag = document.createDocumentFragment();
-        let last = 0, m;
-        while ((m = re.exec(text))) {
-          if (m.index > last) frag.appendChild(document.createTextNode(text.slice(last, m.index)));
-          const mark = document.createElement("mark");
-          mark.className = "hl";
-          mark.textContent = m[0];
+        let lastIndex = 0;
+        let match;
+        while ((match = re.exec(text))) {
+          if (match.index > lastIndex) {
+            frag.appendChild(
+              document.createTextNode(text.slice(lastIndex, match.index))
+            );
+          }
+          const mark = document.createElement('mark');
+          mark.className = 'hl';
+          mark.textContent = match[0];
           frag.appendChild(mark);
-          last = m.index + m[0].length;
+
+          lastIndex = match.index + match[0].length;
         }
-        if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+        if (lastIndex < text.length) {
+          frag.appendChild(
+            document.createTextNode(text.slice(lastIndex))
+          );
+        }
+
         node.parentNode.replaceChild(frag, node);
       });
     });
   }
 
-  if (highlightBtn){
-    highlightBtn.addEventListener("click", ()=>{
+  if (highlightBtn) {
+    highlightBtn.addEventListener('click', () => {
       const q = input.value.trim();
       clearHighlights();
       doHighlight(q);
@@ -441,41 +628,49 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function _textFrom(el) {
-  if (!el) return "";
-  if ("value" in el) return el.value;
-  if (el.getAttribute && el.getAttribute("contenteditable") === "true") {
-    return el.innerText || el.textContent || "";
+/* ==========================
+   11. COPY BUTTONS  (.copy-btn data-copy="#id")
+   ========================== */
+function textFromElement(el) {
+  if (!el) return '';
+  if ('value' in el) return el.value;
+  if (el.getAttribute && el.getAttribute('contenteditable') === 'true') {
+    return el.innerText || el.textContent || '';
   }
-  return el.innerText || el.textContent || "";
+  return el.innerText || el.textContent || '';
 }
 
-document.addEventListener("click", async (e) => {
-  const btn = e.target.closest(".copy-btn");
+document.addEventListener('click', async (e) => {
+  const btn = e.target.closest('.copy-btn');
   if (!btn) return;
 
   const selector = btn.dataset.copy || btn.dataset.target;
   const el = selector ? document.querySelector(selector) : null;
-  const text = _textFrom(el);
+  const text = textFromElement(el);
 
-  const prev = btn.textContent;
-  const setBack = () => setTimeout(() => (btn.textContent = prev), 1200);
+  const originalBtnText = btn.textContent;
+
+  async function setTemp(msg) {
+    btn.textContent = msg;
+    setTimeout(() => {
+      btn.textContent = originalBtnText;
+    }, 1200);
+  }
 
   if (!text) {
-    btn.textContent = "No text";
-    return setBack();
+    return setTemp('No text');
   }
 
   try {
     await navigator.clipboard.writeText(text);
-    btn.textContent = "✔ Copied!";
-    return setBack();
+    return setTemp('✔ Copied!');
   } catch (_) {
     try {
-      if (el && "select" in el) {
+      if (el && 'select' in el) {
         const active = document.activeElement;
-        el.focus(); el.select();
-        document.execCommand("copy");
+        el.focus();
+        el.select();
+        document.execCommand('copy');
         if (active && active.focus) active.focus();
       } else if (el) {
         const range = document.createRange();
@@ -483,136 +678,361 @@ document.addEventListener("click", async (e) => {
         const sel = window.getSelection();
         sel.removeAllRanges();
         sel.addRange(range);
-        document.execCommand("copy");
+        document.execCommand('copy');
         sel.removeAllRanges();
       } else {
-        const ta = document.createElement("textarea");
+        const ta = document.createElement('textarea');
         ta.value = text;
-        ta.style.position = "fixed";
-        ta.style.opacity = "0";
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
         document.body.appendChild(ta);
         ta.select();
-        document.execCommand("copy");
+        document.execCommand('copy');
         document.body.removeChild(ta);
       }
-      btn.textContent = "✔ Copied!";
+      return setTemp('✔ Copied!');
     } catch (err) {
       console.error(err);
-      btn.textContent = "Failed";
-    } finally {
-      setBack();
+      return setTemp('Failed');
     }
   }
 });
 
-(function lazyLoadImages(){
-  const imgs = Array.from(document.querySelectorAll('img.lazy[data-src]'));
+/* ==========================
+   12. SCROLL PROGRESS BAR (pink bar at top)
+   ========================== */
+(function initScrollProgress() {
+  const bar = document.getElementById('progress-bar');
+  if (!bar) return;
+
+  function updateBar() {
+    const scrollTop =
+      window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight;
+    const winHeight = window.innerHeight;
+    const percent = (scrollTop / (docHeight - winHeight)) * 100;
+    bar.style.width = percent + '%';
+  }
+
+  window.addEventListener('scroll', updateBar);
+  window.addEventListener('resize', updateBar);
+  updateBar();
+})();
+
+/* ==========================
+   13. LAZY LOAD IMAGES (img.lazy data-src="...")
+   ========================== */
+(function lazyLoadImages() {
+  const imgs = Array.from(
+    document.querySelectorAll('img.lazy[data-src]')
+  );
   if (!imgs.length) return;
 
-  const markLoaded = (img) => {
+  function markLoaded(img) {
     img.classList.add('lazy-loaded');
     img.removeAttribute('data-src');
-  };
+  }
 
   if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const img = entry.target;
-        img.src = img.dataset.src;
-        img.addEventListener('load', () => markLoaded(img), { once: true });
-        obs.unobserve(img);
-      });
-    }, { rootMargin: '200px 0px' });
+    const io = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.addEventListener(
+            'load',
+            () => markLoaded(img),
+            { once: true }
+          );
+          obs.unobserve(img);
+        });
+      },
+      { rootMargin: '200px 0px' }
+    );
 
-    imgs.forEach(img => io.observe(img));
+    imgs.forEach((img) => io.observe(img));
     return;
   }
 
+  // fallback, если IntersectionObserver нет
   let pending = imgs.slice();
+
   function loadVisible() {
-    const limit = window.scrollY + window.innerHeight + 200;
-    pending = pending.filter(img => {
+    const limit =
+      window.scrollY + window.innerHeight + 200;
+    pending = pending.filter((img) => {
       if (!img.dataset.src) return false;
       const rect = img.getBoundingClientRect();
       const top = rect.top + window.scrollY;
       if (top < limit) {
         img.src = img.dataset.src;
-        img.addEventListener('load', () => markLoaded(img), { once: true });
+        img.addEventListener(
+          'load',
+          () => markLoaded(img),
+          { once: true }
+        );
         return false;
       }
       return true;
     });
+
     if (!pending.length) {
       window.removeEventListener('scroll', loadVisible);
       window.removeEventListener('resize', loadVisible);
       window.removeEventListener('orientationchange', loadVisible);
     }
   }
+
   window.addEventListener('scroll', loadVisible);
   window.addEventListener('resize', loadVisible);
   window.addEventListener('orientationchange', loadVisible);
   loadVisible();
 })();
-// === Task 9: Lazy Loading images ===
+// ==========================
+// 3b. BACKGROUND COLOR CYCLER (Add to Cart button on home)
+// ==========================
 document.addEventListener('DOMContentLoaded', () => {
-  const lazyImgs = Array.from(document.querySelectorAll('img.lazy'));
+  const colorBtn = document.getElementById('colorCycleBtn');
+  if (!colorBtn) return;
 
-  // Общее действие «вставить src и отметить как загруженную»
-  function reveal(img) {
-    const onLoad = () => img.classList.add('loaded');
-    if (img.complete) {
-      // иногда браузер уже подгрузил из кэша
-      img.classList.add('loaded');
-    } else {
-      img.addEventListener('load', onLoad, { once: true });
-    }
-    if (img.dataset.src)   { img.src   = img.dataset.src; }
-    if (img.dataset.srcset){ img.srcset= img.dataset.srcset; }
+  // тот же список цветов, как у тебя было раньше
+  const backgroundColors = [
+    '#D7BFDC',
+    '#FFD8F0',
+    '#ADD8E6',
+    '#98FB98',
+    '#FFFACD',
+    '#FFB6C1',
+    'white'
+  ];
 
-    img.removeAttribute('data-src');
-    img.removeAttribute('data-srcset');
+  let colorIndex = 0;
+
+  colorBtn.addEventListener('click', () => {
+    document.body.style.backgroundColor = backgroundColors[colorIndex];
+    colorIndex = (colorIndex + 1) % backgroundColors.length;
+  });
+});
+// ==========================
+// 14. STAT COUNTERS ("0 Orders" -> 115100 etc.)
+// запускается 1 раз, когда блок со счетчиками появился на экране
+// ==========================
+(function initStatCounters() {
+  const counters = document.querySelectorAll('.count');
+  if (!counters.length) return;
+  let animated = false;
+
+  function animateCounters() {
+    if (animated) return;
+    animated = true;
+    $('.count').each(function () {
+      const $this = $(this);
+      const target = parseInt($this.attr('data-count'), 10) || 0;
+
+      $({ numberValue: 0 }).animate(
+        { numberValue: target },
+        {
+          duration: 2000,
+          easing: 'swing',
+          step: function (now) {
+            $this.text(Math.floor(now));
+          },
+          complete: function () {
+            $this.text(target);
+          }
+        }
+      );
+    });
   }
-
   if ('IntersectionObserver' in window) {
+    const section = document.querySelector('.icons-container');
+    if (!section) {
+      animateCounters();
+      return;
+    }
 
-    const io = new IntersectionObserver((entries, obs) => {
+    const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          reveal(entry.target);
-          obs.unobserve(entry.target);
+          animateCounters();
+          obs.disconnect();
         }
       });
     }, {
-      root: null,
-      rootMargin: '200px 0px', 
-      threshold: 0.01
+      threshold: 0.2
     });
 
-    lazyImgs.forEach(img => io.observe(img));
+    observer.observe(section);
   } else {
-
-    const loadVisible = () => {
-      lazyImgs.forEach(img => {
-        if (!img.dataset.src) return;
-        const rect = img.getBoundingClientRect();
-        const buffer = 200; 
-        if (rect.top < window.innerHeight + buffer && rect.bottom > -buffer) {
-          reveal(img);
-        }
-      });
-
-      if (lazyImgs.every(img => !img.dataset.src)) {
-        window.removeEventListener('scroll', onScroll);
-        window.removeEventListener('resize', onScroll);
-        window.removeEventListener('orientationchange', onScroll);
-      }
-    };
-    const onScroll = () => window.requestAnimationFrame(loadVisible);
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    window.addEventListener('orientationchange', onScroll);
-    loadVisible();
+    animateCounters();
   }
+})();
+/* ==========================
+   9. ORDER FORM VALIDATION (order.html)
+   ========================== */
+const orderForm = document.getElementById('orderForm');
+if (orderForm) {
+  orderForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const buyerName = orderForm.querySelector('input[placeholder="Напишите ваше имя"]');
+    const buyerPhone = orderForm.querySelector('input[placeholder="+7 (000) 000-00-00"]');
+    const receiverName = orderForm.querySelector('input[placeholder="Напишите имя получателя"]');
+    const receiverPhone = orderForm.querySelectorAll('input[placeholder="+7 (000) 000-00-00"]')[1];
+    const address = orderForm.querySelector('input[placeholder="Напишите адрес, подъезд, квартиру"]');
+    const dateField = orderForm.querySelector('#date');
+    if (
+      !buyerName.value.trim() ||
+      !buyerPhone.value.trim() ||
+      !receiverName.value.trim() ||
+      !receiverPhone.value.trim() ||
+      !address.value.trim() ||
+      !dateField.value
+    ) {
+      alert('Пожалуйста, заполните все обязательные поля');
+      return;
+    }
+
+    alert('Ваш заказ принят! 💐 Мы свяжемся для подтверждения.');
+    orderForm.reset();
+  });
+}
+// ==========================
+// Toast helper (один на всё)
+// ==========================
+function showToast(msg) {
+  const toastBox = document.getElementById('toast');
+  if (!toastBox) return;
+
+  toastBox.textContent = msg;
+  toastBox.style.display = 'block';
+  toastBox.className = 'alert alert-dark shadow position-fixed bottom-0 end-0 m-3';
+  toastBox.style.zIndex = '9999';
+  toastBox.style.minWidth = '200px';
+  toastBox.style.maxWidth = '260px';
+  toastBox.style.fontSize = '14px';
+  toastBox.style.padding = '10px 14px';
+  toastBox.style.opacity = '1';
+
+  setTimeout(() => {
+    toastBox.style.transition = 'opacity .4s';
+    toastBox.style.opacity = '0';
+
+    setTimeout(() => {
+      toastBox.style.display = 'none';
+      toastBox.style.transition = '';
+      toastBox.style.opacity = '';
+    }, 400);
+  }, 1500);
+}
+
+
+// ==========================
+// Favorite toggle (сердечко)
+// ==========================
+document.addEventListener('DOMContentLoaded', () => {
+  const favButtons = document.querySelectorAll('.fav-btn');
+
+  favButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // переключаем состояние "избранное"
+      btn.classList.toggle('active-fav');
+
+      if (btn.classList.contains('active-fav')) {
+        // иконка heart -> check
+        btn.classList.remove('fa-heart');
+        btn.classList.add('fa-check');
+
+        showToast('Товар добавлен в избранное 💖');
+      } else {
+        // иконка check -> heart
+        btn.classList.remove('fa-check');
+        btn.classList.add('fa-heart');
+
+        showToast('Удалено из избранного');
+      }
+    });
+  });
+
+
+  // ==========================
+  // Cart toggle (add to cart)
+  // ==========================
+  const cartButtons = document.querySelectorAll('.cart-btn');
+
+  cartButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // будем хранить состояние в data-атрибуте
+      const isActive = btn.dataset.incart === 'true';
+
+      if (!isActive) {
+        // добавить в корзину
+        btn.dataset.incart = 'true';
+
+        // визуально можно поменять текст на Added ✓
+        // если хочешь оставить "add to cart" всегда одинаковым — удали эту строку
+        btn.innerHTML = '<i class="fas fa-check"></i> added';
+
+        showToast('Товар добавлен в корзину 🛍️');
+      } else {
+        // убрать из корзины
+        btn.dataset.incart = 'false';
+
+        // вернуть оригинальный текст
+        btn.innerHTML = 'add to cart';
+
+        showToast('Удалено из корзины');
+      }
+    });
+  });
+
+
+  // ==========================
+  // Share toggle (стрелочка)
+  // ==========================
+  const shareButtons = document.querySelectorAll('.share-btn');
+
+  shareButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // тоже сделаем toggle через data
+      const isShared = btn.dataset.shared === 'true';
+
+      if (!isShared) {
+        btn.dataset.shared = 'true';
+
+        // можно поменять иконку share -> check-share
+        btn.classList.remove('fa-share');
+        btn.classList.add('fa-check');
+
+        showToast('Переслано 💗');
+      } else {
+        btn.dataset.shared = 'false';
+
+        // вернуть иконку обратно
+        btn.classList.remove('fa-check');
+        btn.classList.add('fa-share');
+
+        showToast('Отмена отправки');
+      }
+    });
+  });
+
 });
+  const faqItems = document.querySelectorAll('.faq-item');
+
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+
+    question.addEventListener('click', () => {
+      faqItems.forEach(el => {
+        if (el !== item) el.classList.remove('active');
+      });
+      item.classList.toggle('active');
+    });
+  });

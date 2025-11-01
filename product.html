@@ -15,6 +15,10 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
+<div id="toast"
+     class="position-fixed bottom-0 end-0 m-3 alert alert-dark shadow"
+     style="display:none; z-index:9999; min-width:200px; max-width:260px; font-size:14px;">
+</div>
 <body>
 </p>
 
@@ -49,310 +53,612 @@
   <b class="cart-amount">$0.00</b>
 </div>
 <section class="products" id="flowers">
-    <h1 class="heading"> <span>Flowers</span> </h1>
+    <h1 class="heading"><span>Flowers</span></h1>
 
     <div class="box-container">
 
-        <div class="box">
-            <span class="discount">-10%</span>
-            <div class="image">
-                <img src="images/img-1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-10%</span>
+        <div class="image">
+          <img src="images/img-1.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-15%</span>
-            <div class="image">
-                <img src="images/img-2.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-15%</span>
+        <div class="image">
+          <img src="images/img-2.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/img-3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-5%</span>
+        <div class="image">
+          <img src="images/img-3.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-20%</span>
-            <div class="image">
-                <img src="images/img-4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-20%</span>
+        <div class="image">
+          <img src="images/img-4.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-17%</span>
-            <div class="image">
-                <img src="images/img-5.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-17%</span>
+        <div class="image">
+          <img src="images/img-5.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-3%</span>
-            <div class="image">
-                <img src="images/img-6.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-3%</span>
+        <div class="image">
+          <img src="images/img-6.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-18%</span>
-            <div class="image">
-                <img src="images/img-7.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-18%</span>
+        <div class="image">
+          <img src="images/img-7.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-10%</span>
-            <div class="image">
-                <img src="images/img-8.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-10%</span>
+        <div class="image">
+          <img src="images/img-8.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/img-9.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>flower pot</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-5%</span>
+        <div class="image">
+          <img src="images/img-9.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
     </div>
+  </section>
 
-</section>
-
-<section class="products" id="chocolates">
-    <h1 class="heading"> <span>Chocolates</span> </h1>
+  <section class="products" id="chocolates">
+    <h1 class="heading"><span>Chocolates</span></h1>
 
     <div class="box-container">
 
-        <div class="box">
-            <span class="discount">-10%</span>
-            <div class="image">
-                <img src="images/choco1.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Dubai chocolate</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-10%</span>
+        <div class="image">
+          <img src="images/choco1.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>Dubai chocolate</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-15%</span>
-            <div class="image">
-                <img src="images/choco2.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Strawberry in chocolate</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-15%</span>
+        <div class="image">
+          <img src="images/choco2.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>Strawberry in chocolate</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/choco3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Strawberry in chocolate</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-5%</span>
+        <div class="image">
+          <img src="images/choco3.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>Strawberry in chocolate</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-20%</span>
-            <div class="image">
-                <img src="images/choco4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Ice cream</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-20%</span>
+        <div class="image">
+          <img src="images/choco4.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>Ice cream</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-17%</span>
-            <div class="image">
-                <img src="images/choco5.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Merci</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-17%</span>
+        <div class="image">
+          <img src="images/choco5.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>Merci</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-3%</span>
-            <div class="image">
-                <img src="images/choco6.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Donuts</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-3%</span>
+        <div class="image">
+          <img src="images/choco6.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>Donuts</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-18%</span>
-            <div class="image">
-                <img src="images/choco7.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Chocolates</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-18%</span>
+        <div class="image">
+          <img src="images/choco7.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>Chocolates</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-10%</span>
-            <div class="image">
-                <img src="images/choco8.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Fruit jellies</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-10%</span>
+        <div class="image">
+          <img src="images/choco8.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>Fruit jellies</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
-        <div class="box">
-            <span class="discount">-5%</span>
-            <div class="image">
-                <img src="images/choco9.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="cart-btn">add to cart</a>
-                    <a href="#" class="fas fa-share"></a>
-                </div>
-            </div>
-            <div class="content">
-                <h3>Macarons</h3>
-                <div class="price"> $12.99 <span>$15.99</span> </div>
-            </div>
+      <div class="box">
+        <span class="discount">-5%</span>
+        <div class="image">
+          <img src="images/choco9.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
         </div>
+        </div>
+        <div class="content">
+          <h3>Macarons</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
 
     </div>
+  </section>
 
-</section>
+
+  <section class="products" id="accessories">
+    <h1 class="heading"><span>Accessories</span></h1>
+
+    <div class="box-container">
+
+      <div class="box">
+        <span class="discount">-10%</span>
+        <div class="image">
+          <img src="images/acc3.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>flower pot</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-15%</span>
+        <div class="image">
+          <img src="images/accc1.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Bracelets</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-5%</span>
+        <div class="image">
+          <img src="images/acc2.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Rings</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-20%</span>
+        <div class="image">
+          <img src="images/acc4.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Watches</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-17%</span>
+        <div class="image">
+          <img src="images/acc5.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Rings</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-3%</span>
+        <div class="image">
+          <img src="images/acc6.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Earrings</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-18%</span>
+        <div class="image">
+          <img src="images/acc7.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Necklace</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-10%</span>
+        <div class="image">
+          <img src="images/acc8.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Rings</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-5%</span>
+        <div class="image">
+          <img src="images/acc9.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Rings</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class="products" id="clothes">
+    <h1 class="heading"><span>Clothes</span></h1>
+
+    <div class="box-container">
+
+      <div class="box">
+        <span class="discount">-10%</span>
+        <div class="image">
+          <img src="images/clo1.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Outfit 1</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-15%</span>
+        <div class="image">
+          <img src="images/clo2.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Outfit 2</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-5%</span>
+        <div class="image">
+          <img src="images/clo3.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Outfit 3</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-20%</span>
+        <div class="image">
+          <img src="images/clo4.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Outfit 4</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-17%</span>
+        <div class="image">
+          <img src="images/clo5.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Outfit 5t</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-3%</span>
+        <div class="image">
+          <img src="images/clo6.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Outfit 6</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-18%</span>
+        <div class="image">
+          <img src="images/clo7.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Outfit 7</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-10%</span>
+        <div class="image">
+          <img src="images/clo8.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Outfit 8</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+      <div class="box">
+        <span class="discount">-5%</span>
+        <div class="image">
+          <img src="images/clo9.jpg" alt="">
+          <div class="icons">
+            <a href="#" class="fas fa-heart fav-btn" aria-label="Add to favorites"></a>
+            <a href="#" class="cart-btn">add to cart</a>
+            <a href="#" class="fas fa-share share-btn" aria-label="Share product"></a>
+        </div>
+        </div>
+        <div class="content">
+          <h3>Outfit 9</h3>
+          <div class="price">$12.99 <span>$15.99</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
 <section class="products" id="accessories">
     <h1 class="heading"> <span>Accessories</span> </h1>
@@ -698,102 +1004,18 @@
     </div>
   </div>
 </section>
+<footer class="bg-dark text-white text-center py-4 mt-5">
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <p class="mb-0 text-center">
+      Created by <b>Zukhra &amp; Akniyet</b> | SE-2409 | A&amp;Z Store
+    </p>
 
+    <span id="currentDateTimeFooter" style="font-size:1.4rem;"></span>
 
-<style>
-.faq-section {
-  max-width: 800px;
-  margin: 60px auto;
-  padding: 0 20px;
-  font-family: "Arial", sans-serif;
-}
-.faq-title {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 25px;
-  color: #222;
-}
-
-
-.faq-item {
-  border-bottom: 1px solid #e2e2e2;
-  overflow: hidden;
-}
-
-
-.faq-question {
-  width: 100%;
-  background: #fff;
-  border: none;
-  outline: none;
-  text-align: left;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 18px 10px;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.3s;
-}
-.faq-question:hover {
-  background: #fafafa;
-}
-
-
-.faq-question::after {
-  content: "▾";
-  position: absolute;
-  right: 15px;
-  font-size: 16px;
-  color: #777;
-  transition: transform 0.3s ease;
-}
-.faq-item.active .faq-question::after {
-  transform: rotate(180deg);
-}
-
-
-.faq-answer {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-.faq-answer p {
-  margin: 0;
-  padding: 0 0 15px 10px;
-  color: #444;
-  line-height: 1.6;
-}
-
-
-.faq-item.active .faq-answer {
-  max-height: 300px;
-  opacity: 1;
-}
-</style>
-
-
-<script>
-  const faqItems = document.querySelectorAll('.faq-item');
-
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-
-    question.addEventListener('click', () => {
-      faqItems.forEach(el => {
-        if (el !== item) el.classList.remove('active');
-      });
-      item.classList.toggle('active');
-    });
-  });
-</script>
-
- <footer class="bg-dark text-white text-center py-3">
-    <p class="mb-0">Created by <b>Zukhra & Akniyet</b> | SE-2409 | A&Z Store</p>
-  </footer>
-<footer class="text-center py-3 bg-light border-top">
-  <p id="currentDateTimeFooter" style="margin: 0; font-size: 1.2rem; color:#666;"></p>
+    <button id="showTimeButton" class="btn btn-dark">Show Current Time</button>
+  </div>
 </footer>
+
 <script src="main.js"></script>
 </body>
 </html>

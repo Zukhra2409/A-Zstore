@@ -807,12 +807,14 @@ const orderForm = document.getElementById('orderForm');
 if (orderForm) {
   orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const buyerName = orderForm.querySelector('input[placeholder="Напишите ваше имя"]');
-    const buyerPhone = orderForm.querySelector('input[placeholder="+7 (000) 000-00-00"]');
-    const receiverName = orderForm.querySelector('input[placeholder="Напишите имя получателя"]');
-    const receiverPhone = orderForm.querySelectorAll('input[placeholder="+7 (000) 000-00-00"]')[1];
-    const address = orderForm.querySelector('input[placeholder="Напишите адрес, подъезд, квартиру"]');
-    const dateField = orderForm.querySelector('#date');
+    const buyerName    = orderForm.querySelector('input[placeholder="Напишите ваше имя"]');
+    const buyerPhone   = orderForm.querySelector('input[placeholder="+7 (000) 000-00-00"]');
+
+    const receiverName = orderForm.querySelector('input[placeholder="Имя получателя"]');
+    const receiverPhone= orderForm.querySelectorAll('input[placeholder="+7 (000) 000-00-00"]')[1];
+    const address      = orderForm.querySelector('input[placeholder="Адрес, подъезд, квартира"]');
+    const dateField    = orderForm.querySelector('#date');
+
     if (
       !buyerName.value.trim() ||
       !buyerPhone.value.trim() ||

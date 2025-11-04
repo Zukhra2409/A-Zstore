@@ -800,7 +800,7 @@ img.lazy.loaded {
 .active-tab {
     font-size: 13px;
     font-weight: 600;
-    color: #e91e63; /* тот же розовый, что у кнопки */
+    color: #e91e63; 
     position: relative;
     text-align: center;
 }
@@ -808,7 +808,7 @@ img.lazy.loaded {
 .active-tab::after {
     content: "";
     display: block;
-    width: 100px;          /* длина линии под Login, как в твоём скрине */
+    width: 100px;          
     height: 2px;
     background: #e91e63;
     margin: 4px auto 0;
@@ -818,6 +818,6 @@ img.lazy.loaded {
 .inactive-tab {
     font-size: 13px;
     font-weight: 600;
-    color: #000;           /* ← вот это главное: чисто чёрный */
+    color: #000;        
     text-align: center;
 }

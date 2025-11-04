@@ -1,6 +1,3 @@
-/* ==========================
-   0. LOGIN / REGISTER TOGGLE
-   ========================== */
 const loginBtn = document.getElementById('loginBtn');
 const registerBtn = document.getElementById('registerBtn');
 const loginForm = document.getElementById('loginForm');
@@ -22,9 +19,6 @@ if (loginBtn && registerBtn && loginForm && registerForm) {
   });
 }
 
-/* ==========================
-   1. REGISTER FORM VALIDATION (REGISTER PAGE)
-   ========================== */
 const regForm = document.getElementById('registerForm');
 const regEmail = document.getElementById('regEmail');
 const regPass = document.getElementById('regPass');
@@ -48,22 +42,17 @@ if (regForm) {
 
     let ok = true;
 
-    // email
     const emailVal = (regEmail?.value || '').trim();
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
     if (!emailValid) {
       ok = false;
       showRegError(regEmail, 'Enter a valid email address');
     } else showRegError(regEmail, '');
-
-    // password
     const passVal = (regPass?.value || '').trim();
     if (passVal.length < 6) {
       ok = false;
       showRegError(regPass, 'Password must be at least 6 characters');
     } else showRegError(regPass, '');
-
-    // confirm password
     const confirmVal = (regConfirm?.value || '').trim();
     if (!confirmVal || confirmVal !== passVal) {
       ok = false;
@@ -71,23 +60,18 @@ if (regForm) {
     } else showRegError(regConfirm, '');
 
     if (!ok) return;
-
-    // success
     regForm.reset();
     if (successMsg) successMsg.hidden = false;
   });
 }
 
-/* =====================================================================================
-   2. HERO "SHOP NOW" MESSAGE TOGGLER (INDEX HOME HERO)
-   ===================================================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const shopNowButton = document.getElementById('shopNowBtn');
-  const messageEl = document.getElementById('message'); // текст под заголовком hero
+  const messageEl = document.getElementById('message'); 
 
   if (!shopNowButton || !messageEl) return;
 
-  // берём оригинальный текст как он написан в HTML
+  
   const originalText = messageEl.innerHTML.trim();
   let showingOffer = false;
 
@@ -109,9 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* ==========================
-   3. SIMPLE BACKGROUND COLOR TOGGLE HELPERS (опционально)
-   ========================== */
+
 let isPink = false;
 function toggleBackgroundColor() {
   document.body.style.backgroundColor = isPink ? 'white' : '#FFD8F0';
@@ -125,9 +107,6 @@ function toggleBackgroundColorCycle() {
   colorIndex = (colorIndex + 1) % backgroundColors.length;
 }
 
-/* ==========================
-   4. CART ("add to cart" + total)
-   ========================== */
 document.addEventListener('DOMContentLoaded', () => {
   const cart = [];
 
@@ -164,9 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-/* ==========================
-   5. THEME TOGGLE (Light / Dark) + localStorage
-   ========================== */
 window.addEventListener('DOMContentLoaded', () => {
   const themeBtn = document.getElementById('themeBtn');
   const body = document.body;
@@ -195,9 +171,6 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* ==========================
-   6. KEYBOARD NAVIGATION по меню (стрелки ← →)
-   ========================== */
 const menuItems = document.querySelectorAll('.nav-item');
 let navCurrentIndex = 0;
 
@@ -222,9 +195,6 @@ if (menuItems.length) {
   updateNavFocus();
 }
 
-/* ==========================
-   7. POPUP (Contact / Review modal + рейтинг звёздами)
-   ========================== */
 (function initPopup() {
   const openBtn = document.querySelector('#openBtn');
   const closeBtn = document.querySelector('#closeBtn');
@@ -261,7 +231,7 @@ if (menuItems.length) {
     overlay.addEventListener('click', closePopup);
   }
 
-  // звёзды рейтинга
+
   const allStar = document.querySelectorAll('.rating .star');
   const ratingValueInput = document.querySelector('.rating input');
   if (allStar.length && ratingValueInput) {
@@ -282,7 +252,6 @@ if (menuItems.length) {
     });
   }
 
-  // отправка попапа
   if (submitBtn) {
     submitBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -311,20 +280,16 @@ if (menuItems.length) {
   }
 })();
 
-/* ==========================
-   8. CONTACT FORM VALIDATION (форма "contact us")
-   ========================== */
+
 const contactFormEl = document.getElementById('contactForm');
 if (contactFormEl) {
   contactFormEl.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    // чистим старые тексты ошибок
     contactFormEl.querySelectorAll('.error').forEach((m) => {
       m.textContent = '';
     });
 
-    // берём поля ТОЛЬКО внутри contactForm (важно, потому что у тебя id="message" есть и в hero)
     const nameInput = contactFormEl.querySelector('#name');
     const emailInput = contactFormEl.querySelector('#email');
     const phoneInput = contactFormEl.querySelector('#phone');
@@ -332,7 +297,6 @@ if (contactFormEl) {
 
     let isValid = true;
 
-    // name
     const nameVal = (nameInput?.value || '').trim();
     const namePattern = /^[A-Za-z\s]+$/;
     if (!nameVal || !namePattern.test(nameVal)) {
@@ -340,7 +304,6 @@ if (contactFormEl) {
       setInlineError('name', 'Please enter a valid name (letters only, no numbers).');
     }
 
-    // email
     const emailVal = (emailInput?.value || '').trim();
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!emailPattern.test(emailVal)) {
@@ -348,7 +311,6 @@ if (contactFormEl) {
       setInlineError('email', 'Please enter a valid email.');
     }
 
-    // phone
     if (phoneInput) {
       const phoneErr = contactFormEl.querySelector('#phoneError');
       const phonePattern = /^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/;
@@ -360,7 +322,6 @@ if (contactFormEl) {
       }
     }
 
-    // message
     const msgVal = (msgInput?.value || '').trim();
     if (!msgVal) {
       isValid = false;
@@ -373,7 +334,6 @@ if (contactFormEl) {
     contactFormEl.reset();
   });
 
-  // маска телефона (формат +7(777)123-45-67)
   const phoneInput = contactFormEl.querySelector('#phone');
   if (phoneInput) {
     phoneInput.addEventListener('input', (event) => {
@@ -398,7 +358,6 @@ if (contactFormEl) {
     });
   }
 
-  // helper чтобы показать текст ошибки под инпутом
   function setInlineError(inputId, text) {
     const field = contactFormEl.querySelector('#' + inputId);
     if (!field) return;
@@ -412,9 +371,6 @@ if (contactFormEl) {
   }
 }
 
-/* ==========================
-   9. FOOTER CLOCK (кнопка Show time)
-   ========================== */
 function displayCurrentDateTime() {
   const target = document.getElementById('currentDateTimeFooter');
   if (!target) return;
@@ -443,9 +399,6 @@ if (showTimeBtn) {
   });
 }
 
-/* ==========================
-   10. SEARCH / FILTER / HIGHLIGHT / SUGGEST
-   ========================== */
 document.addEventListener('DOMContentLoaded', () => {
   const input =
     document.getElementById('searchInput') ||
@@ -485,7 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // список названий продуктов для подсказки
   const productNames = Array.from(
     new Set(
       getAllCards()
@@ -537,14 +489,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // фильтр при вводе текста
   input.addEventListener('input', () => {
     const q = input.value.trim();
     filterCards(q);
     renderSuggest(q);
   });
 
-  // ================= highlight logic =================
   function escapeRegex(str) {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
@@ -628,9 +578,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-/* ==========================
-   11. COPY BUTTONS  (.copy-btn data-copy="#id")
-   ========================== */
 function textFromElement(el) {
   if (!el) return '';
   if ('value' in el) return el.value;
@@ -698,9 +645,6 @@ document.addEventListener('click', async (e) => {
   }
 });
 
-/* ==========================
-   12. SCROLL PROGRESS BAR (pink bar at top)
-   ========================== */
 (function initScrollProgress() {
   const bar = document.getElementById('progress-bar');
   if (!bar) return;
@@ -719,9 +663,6 @@ document.addEventListener('click', async (e) => {
   updateBar();
 })();
 
-/* ==========================
-   13. LAZY LOAD IMAGES (img.lazy data-src="...")
-   ========================== */
 (function lazyLoadImages() {
   const imgs = Array.from(
     document.querySelectorAll('img.lazy[data-src]')
@@ -755,7 +696,6 @@ document.addEventListener('click', async (e) => {
     return;
   }
 
-  // fallback, если IntersectionObserver нет
   let pending = imgs.slice();
 
   function loadVisible() {
@@ -789,14 +729,11 @@ document.addEventListener('click', async (e) => {
   window.addEventListener('orientationchange', loadVisible);
   loadVisible();
 })();
-// ==========================
-// 3b. BACKGROUND COLOR CYCLER (Add to Cart button on home)
-// ==========================
+
 document.addEventListener('DOMContentLoaded', () => {
   const colorBtn = document.getElementById('colorCycleBtn');
   if (!colorBtn) return;
 
-  // тот же список цветов, как у тебя было раньше
   const backgroundColors = [
     '#D7BFDC',
     '#FFD8F0',
@@ -814,10 +751,7 @@ document.addEventListener('DOMContentLoaded', () => {
     colorIndex = (colorIndex + 1) % backgroundColors.length;
   });
 });
-// ==========================
-// 14. STAT COUNTERS ("0 Orders" -> 115100 etc.)
-// запускается 1 раз, когда блок со счетчиками появился на экране
-// ==========================
+
 (function initStatCounters() {
   const counters = document.querySelectorAll('.count');
   if (!counters.length) return;
@@ -868,9 +802,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animateCounters();
   }
 })();
-/* ==========================
-   9. ORDER FORM VALIDATION (order.html)
-   ========================== */
+
 const orderForm = document.getElementById('orderForm');
 if (orderForm) {
   orderForm.addEventListener('submit', (e) => {
@@ -897,9 +829,7 @@ if (orderForm) {
     orderForm.reset();
   });
 }
-// ==========================
-// Toast helper (один на всё)
-// ==========================
+
 function showToast(msg) {
   const toastBox = document.getElementById('toast');
   if (!toastBox) return;
@@ -926,28 +856,20 @@ function showToast(msg) {
   }, 1500);
 }
 
-
-// ==========================
-// Favorite toggle (сердечко)
-// ==========================
 document.addEventListener('DOMContentLoaded', () => {
   const favButtons = document.querySelectorAll('.fav-btn');
 
   favButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-
-      // переключаем состояние "избранное"
       btn.classList.toggle('active-fav');
 
       if (btn.classList.contains('active-fav')) {
-        // иконка heart -> check
         btn.classList.remove('fa-heart');
         btn.classList.add('fa-check');
 
         showToast('Товар добавлен в избранное 💖');
       } else {
-        // иконка check -> heart
         btn.classList.remove('fa-check');
         btn.classList.add('fa-heart');
 
@@ -956,33 +878,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
-  // ==========================
-  // Cart toggle (add to cart)
-  // ==========================
   const cartButtons = document.querySelectorAll('.cart-btn');
 
   cartButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
 
-      // будем хранить состояние в data-атрибуте
       const isActive = btn.dataset.incart === 'true';
 
       if (!isActive) {
-        // добавить в корзину
         btn.dataset.incart = 'true';
 
-        // визуально можно поменять текст на Added ✓
-        // если хочешь оставить "add to cart" всегда одинаковым — удали эту строку
         btn.innerHTML = '<i class="fas fa-check"></i> added';
 
         showToast('Товар добавлен в корзину 🛍️');
       } else {
-        // убрать из корзины
         btn.dataset.incart = 'false';
 
-        // вернуть оригинальный текст
         btn.innerHTML = 'add to cart';
 
         showToast('Удалено из корзины');
@@ -991,22 +903,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // ==========================
-  // Share toggle (стрелочка)
-  // ==========================
+
   const shareButtons = document.querySelectorAll('.share-btn');
 
   shareButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
 
-      // тоже сделаем toggle через data
       const isShared = btn.dataset.shared === 'true';
 
       if (!isShared) {
         btn.dataset.shared = 'true';
 
-        // можно поменять иконку share -> check-share
         btn.classList.remove('fa-share');
         btn.classList.add('fa-check');
 
@@ -1014,7 +922,6 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         btn.dataset.shared = 'false';
 
-        // вернуть иконку обратно
         btn.classList.remove('fa-check');
         btn.classList.add('fa-share');
 

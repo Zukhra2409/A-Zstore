@@ -949,15 +949,13 @@ body.dark-mode .cart-amount{ color:#ff9fd9; }
   max-height: 300px;
   opacity: 1;
 }
-/* ===== Register page dark mode fix ===== */
+
 body.dark-mode {
-  /* убиваем розовый градиент */
   background: #000 !important;
   background-image: none !important;
   color: #f1f3f5 !important;
 }
 
-/* сам белый бокс формы делаем тёмным */
 body.dark-mode .form-wrapper {
   background-color: #1b1b1b !important;
   color: #f1f3f5 !important;
@@ -965,33 +963,29 @@ body.dark-mode .form-wrapper {
   border-radius: 1rem;
 }
 
-/* инпуты внутри формы в дарк моде */
 body.dark-mode .form-wrapper input {
   background: #2a2a2a !important;
   color: #fff !important;
   border: 1px solid #555 !important;
 }
 
-/* кнопка Login / Register остаётся розовой 💖 */
 body.dark-mode .form-wrapper button[type="submit"] {
   background: #e84393 !important;
   color: #fff !important;
 }
 
-/* ошибки и success цвета тоже видны в тёмном фоне */
 body.dark-mode .form-wrapper .error {
   color: #ff6b6b !important;
 }
 body.dark-mode .form-wrapper .success {
   color: #2ecc71 !important;
 }
-/* табы Login / Register сверху формы в тёмной теме */
+
 body.dark-mode #loginBtn,
 body.dark-mode #registerBtn {
   color: #fff !important;
 }
 
-/* подчёркнутый активный таб оставляем розовым */
 body.dark-mode #loginBtn.active,
 body.dark-mode #registerBtn.active {
   color: #e84393 !important;

@@ -905,3 +905,12 @@ body.dark-mode .order-container .form-check-label {
 .btn-order:active {
   color: #fff !important;   
 }
+.products .card .btn-primary {
+  border-color: #e84393;                
+}
+
+.products .card .btn-primary:hover,
+.products .card .btn-primary:focus {
+  border-color: #ff5ca8;                
+  box-shadow: 0 0 0 0.15rem rgba(232, 67, 147, 0.4); 
+}

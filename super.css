@@ -991,3 +991,18 @@ body.dark-mode #registerBtn.active {
   color: #e84393 !important;
   border-bottom: 2px solid #e84393 !important;
 }
+body.dark-mode .text-muted,
+body.dark-theme .text-muted,
+body.night-mode .text-muted {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.btn-primary {
+  border-color: #e84393 !important; 
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  border-color: #ff5ca8 !important;   
+  box-shadow: 0 0 0 0.15rem rgba(232, 67, 147, 0.4); 
+}

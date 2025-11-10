@@ -807,7 +807,7 @@ const orderForm = document.getElementById('orderForm');
 if (orderForm) {
   orderForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const buyerName    = orderForm.querySelector('input[placeholder="Напишите ваше имя"]');
+    const buyerName    = orderForm.querySelector('input[placeholder="Write your name"]');
     const buyerPhone   = orderForm.querySelector('input[placeholder="+7 (000) 000-00-00"]');
 
     const receiverName = orderForm.querySelector('input[placeholder="Имя получателя"]');
@@ -823,11 +823,11 @@ if (orderForm) {
       !address.value.trim() ||
       !dateField.value
     ) {
-      alert('Пожалуйста, заполните все обязательные поля');
+      alert('Please fill in all required fields.');
       return;
     }
 
-    alert('Ваш заказ принят! 💐 Мы свяжемся для подтверждения.');
+    alert('Your order has been accepted! 💐 We will contact you to confirm.');
     orderForm.reset();
   });
 }
@@ -858,55 +858,135 @@ function showToast(msg) {
   }, 1500);
 }
 
+
+const FAVORITES_KEY = 'az_favorites';
+const CART_KEY      = 'az_cart';
+
+function loadList(key) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveList(key, list) {
+  localStorage.setItem(key, JSON.stringify(list));
+}
+
+function getProductFromBox(box) {
+  if (!box) return null;
+
+  const title = box.querySelector('.content h3')?.textContent.trim() || 'Product';
+  const priceText = box.querySelector('.content .price')?.textContent || '$0';
+  const price = parseFloat(priceText.replace(/[^0-9.]/g, '')) || 0;
+  const img = box.querySelector('.image img')?.getAttribute('src') || '';
+
+  const id = title + '|' + img; 
+
+  return { id, title, price, img };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  const favButtons = document.querySelectorAll('.fav-btn');
+  let favorites = loadList(FAVORITES_KEY);
+  let cart      = loadList(CART_KEY);
+
+  const favButtons   = document.querySelectorAll('.fav-btn');
+  const cartButtons  = document.querySelectorAll('.cart-btn');
+  const shareButtons = document.querySelectorAll('.share-btn');
+
+  const favCountEl  = document.getElementById('favCount');
+  const cartCountEl = document.getElementById('cartCount');
+
+  function updateCounters() {
+    if (favCountEl)  favCountEl.textContent  = favorites.length;
+    if (cartCountEl) {
+      const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+      cartCountEl.textContent = totalQty;
+    }
+  }
+
+  function setFavBtnState(btn, active) {
+    if (active) {
+      btn.classList.add('active-fav');
+      btn.classList.remove('fa-heart');
+      btn.classList.add('fa-check');
+    } else {
+      btn.classList.remove('active-fav');
+      btn.classList.remove('fa-check');
+      btn.classList.add('fa-heart');
+    }
+  }
 
   favButtons.forEach(btn => {
+    const box = btn.closest('.box');
+    const product = getProductFromBox(box);
+    if (!product) return;
+
+    if (favorites.some(p => p.id === product.id)) {
+      setFavBtnState(btn, true);
+    }
+
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      btn.classList.toggle('active-fav');
 
-      if (btn.classList.contains('active-fav')) {
-        btn.classList.remove('fa-heart');
-        btn.classList.add('fa-check');
+      const index = favorites.findIndex(p => p.id === product.id);
 
-        showToast('Товар добавлен в избранное 💖');
+      if (index === -1) {
+        favorites.push(product);
+        setFavBtnState(btn, true);
+        showToast('The product added to favorites 💖');
       } else {
-        btn.classList.remove('fa-check');
-        btn.classList.add('fa-heart');
-
-        showToast('Удалено из избранного');
+        favorites.splice(index, 1);
+        setFavBtnState(btn, false);
+        showToast('Removed from favorites');
       }
+
+      saveList(FAVORITES_KEY, favorites);
+      updateCounters();
     });
   });
 
-  const cartButtons = document.querySelectorAll('.cart-btn');
+  function setCartBtnState(btn, active) {
+    if (active) {
+      btn.dataset.incart = 'true';
+      btn.innerHTML = '<i class="fas fa-check"></i> added';
+    } else {
+      btn.dataset.incart = 'false';
+      btn.innerHTML = 'add to cart';
+    }
+  }
 
   cartButtons.forEach(btn => {
+    const box = btn.closest('.box');
+    const product = getProductFromBox(box);
+    if (!product) return;
+
+    const existing = cart.find(p => p.id === product.id);
+    if (existing) {
+      setCartBtnState(btn, true);
+    }
+
     btn.addEventListener('click', (e) => {
       e.preventDefault();
 
-      const isActive = btn.dataset.incart === 'true';
+      const index = cart.findIndex(p => p.id === product.id);
 
-      if (!isActive) {
-        btn.dataset.incart = 'true';
-
-        btn.innerHTML = '<i class="fas fa-check"></i> added';
-
-        showToast('Товар добавлен в корзину 🛍️');
+      if (index === -1) {
+        cart.push({ ...product, qty: 1 });
+        setCartBtnState(btn, true);
+        showToast('Item added to cart 🛍️');
       } else {
-        btn.dataset.incart = 'false';
-
-        btn.innerHTML = 'add to cart';
-
-        showToast('Удалено из корзины');
+        cart.splice(index, 1);
+        setCartBtnState(btn, false);
+        showToast('Removed from cart');
       }
+
+      saveList(CART_KEY, cart);
+      updateCounters();
     });
   });
-
-
-
-  const shareButtons = document.querySelectorAll('.share-btn');
 
   shareButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -916,23 +996,144 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!isShared) {
         btn.dataset.shared = 'true';
-
         btn.classList.remove('fa-share');
         btn.classList.add('fa-check');
-
-        showToast('Переслано 💗');
+        showToast('Forwarded 💗');
       } else {
         btn.dataset.shared = 'false';
-
         btn.classList.remove('fa-check');
         btn.classList.add('fa-share');
-
-        showToast('Отмена отправки');
+        showToast('Cancel sending');
       }
     });
   });
 
+  const favPageContainer = document.getElementById('favoritesContainer');
+  const favEmptyText     = document.getElementById('favoritesEmpty');
+
+  if (favPageContainer) {
+    if (!favorites.length) {
+      if (favEmptyText) favEmptyText.style.display = 'block';
+    } else {
+      if (favEmptyText) favEmptyText.style.display = 'none';
+
+      favorites.forEach(item => {
+        const box = document.createElement('div');
+        box.className = 'box';
+        box.innerHTML = `
+          <div class="image">
+            <img src="${item.img}" alt="${item.title}">
+          </div>
+          <div class="content">
+            <h3>${item.title}</h3>
+            <div class="price">$${item.price.toFixed(2)}</div>
+          </div>
+          <div class="icons mt-2">
+            <button class="btn btn-sm btn-outline-danger remove-fav">Remove</button>
+            <button class="btn btn-sm btn-primary move-to-cart">Add to cart</button>
+          </div>
+        `;
+        favPageContainer.appendChild(box);
+
+        box.querySelector('.remove-fav').addEventListener('click', () => {
+          favorites = favorites.filter(p => p.id !== item.id);
+          saveList(FAVORITES_KEY, favorites);
+          box.remove();
+          updateCounters();
+          if (!favorites.length && favEmptyText) favEmptyText.style.display = 'block';
+        });
+
+        box.querySelector('.move-to-cart').addEventListener('click', () => {
+          if (!cart.find(p => p.id === item.id)) {
+            cart.push({ ...item, qty: 1 });
+            saveList(CART_KEY, cart);
+            updateCounters();
+            showToast('Item added to cart 🛍️');
+          } else {
+            showToast('Item already in cart');
+          }
+        });
+      });
+    }
+  }
+
+  const cartPageContainer = document.getElementById('cartContainer');
+  const cartEmptyText     = document.getElementById('cartEmpty');
+  const cartTotalEl       = document.getElementById('cartPageTotal');
+
+  function renderCartPage() {
+    if (!cartPageContainer) return;
+
+    cartPageContainer.innerHTML = '';
+
+    if (!cart.length) {
+      if (cartEmptyText) cartEmptyText.style.display = 'block';
+      if (cartTotalEl) cartTotalEl.textContent = '$0.00';
+      return;
+    }
+
+    if (cartEmptyText) cartEmptyText.style.display = 'none';
+
+    let total = 0;
+
+    cart.forEach(item => {
+      const qty = item.qty || 1;
+      total += qty * item.price;
+
+      const box = document.createElement('div');
+      box.className = 'box';
+      box.innerHTML = `
+        <div class="image">
+          <img src="${item.img}" alt="${item.title}">
+        </div>
+        <div class="content">
+          <h3>${item.title}</h3>
+          <div class="price">$${item.price.toFixed(2)} × ${qty}</div>
+        </div>
+        <div class="icons mt-2">
+          <button class="btn btn-sm btn-outline-secondary dec-qty">-</button>
+          <button class="btn btn-sm btn-outline-secondary inc-qty">+</button>
+          <button class="btn btn-sm btn-outline-danger remove-cart">Remove</button>
+        </div>
+      `;
+      cartPageContainer.appendChild(box);
+
+      box.querySelector('.dec-qty').addEventListener('click', () => {
+        if (item.qty > 1) {
+          item.qty -= 1;
+        } else {
+          cart = cart.filter(p => p.id !== item.id);
+        }
+        saveList(CART_KEY, cart);
+        renderCartPage();
+        updateCounters();
+      });
+
+      box.querySelector('.inc-qty').addEventListener('click', () => {
+        item.qty = (item.qty || 1) + 1;
+        saveList(CART_KEY, cart);
+        renderCartPage();
+        updateCounters();
+      });
+
+      box.querySelector('.remove-cart').addEventListener('click', () => {
+        cart = cart.filter(p => p.id !== item.id);
+        saveList(CART_KEY, cart);
+        renderCartPage();
+        updateCounters();
+      });
+    });
+
+    if (cartTotalEl) cartTotalEl.textContent = '$' + total.toFixed(2);
+  }
+
+  if (cartPageContainer) {
+    renderCartPage();
+  }
+
+  updateCounters();
 });
+
   const faqItems = document.querySelectorAll('.faq-item');
 
   faqItems.forEach(item => {

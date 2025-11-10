@@ -33,16 +33,28 @@
       </button>
 
       <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
-          <li class="nav-item"><a class="nav-link" href="register.html">Login</a></li>
-          <li class="nav-item ms-2">
-            <button id="themeBtn" class="btn btn-outline-dark btn-sm px-3">🌙 Night Mode</button>
-          </li>
-        </ul>
+       <ul class="navbar-nav ms-auto align-items-center">
+  <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+  <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+  <li class="nav-item">
+    <a class="nav-link d-flex align-items-center" href="favorites.html">
+      Favorites
+      <span id="favCount" class="badge bg-dark ms-1 rounded-pill">0</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link d-flex align-items-center" href="cart.html">
+      Cart
+      <span id="cartCount" class="badge bg-dark ms-1 rounded-pill">0</span>
+    </a>
+  </li>
+
+  <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
+  <li class="nav-item"><a class="nav-link" href="register.html">Login</a></li>
+  <li class="nav-item ms-2">
+    <button id="themeBtn" class="btn btn-outline-dark btn-sm px-3">🌙 Night Mode</button>
+  </li>
+</ul>
       </div>
     </div>
   </nav>
@@ -60,6 +72,28 @@
     </section>
   </div>
 
+<section class="about" id="about">
+
+    <h1 class="heading"> <span> about </span> us </h1>
+
+    <div class="row">
+
+        <div class="video-container">
+            <video src="images/about-vid.mp4" loop autoplay muted></video>
+            <h3>best gift sellers</h3>
+        </div>
+
+        <div class="content">
+            <h3>why choose us?</h3>
+            <p>
+In our online store, you can buy a gift for your loved one. We offer flowers, sweets, clothing, and accessories—everything women love.</p>
+            <p>If you're unsure what to give, you can contact us and we can help you choose a gift to suit your woman's tastes.</p>
+            <a href="#contact" class="btn">Contact us</a>
+        </div>
+
+    </div>
+
+</section>
   <section id="gallery" class="py-5">
     <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
 
@@ -113,7 +147,7 @@
     </div>
   </section>
 
-  <section class="container my-5">
+  <section class="container my-5" id="col">
     <h1 class="heading"><span>Our Categories</span></h1>
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -891,38 +925,40 @@
   </div>
 
   <div id="overlay" style="display: none;"></div>
-<!-- 🌸 Pink footer with links -->
+
 <section class="footer">
   <div class="box-container">
 
     <div class="box">
       <h3>Quick Links</h3>
       <a href="index.html#home">Home</a>
-      <a href="index.html#home">About</a>
-      <a href="product.html">Products</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#col">Products</a>
       <a href="index.html#contact">Contact</a>
     </div>
 
     <div class="box">
       <h3>Extra Links</h3>
       <a href="register.html">My Account</a>
-      <a href="order.html">My Order</a>
-      <a href="product.html">My Favorite</a>
+      <a href="order.html">Order</a>
+      <a href="product.html">Products</a>
+      <a href="cart.html">My Cart</a>
+      <a href="favorites.html">My Favorite</a>
     </div>
 
     <div class="box">
       <h3>Locations</h3>
-      <a href="#">Kazakhstan</a>
-      <a href="#">USA</a>
-      <a href="#">Russia</a>
-      <a href="#">France</a>
+      <a href="https://ru.wikipedia.org/wiki/Казахстан">Kazakhstan</a>
+      <a href="https://ru.wikipedia.org/wiki/Соединённые_Штаты_Америки">USA</a>
+      <a href="https://ru.wikipedia.org/wiki/Россия_(значения)">Russia</a>
+      <a href="https://ru.wikipedia.org/wiki/Франция">France</a>
     </div>
 
     <div class="box">
       <h3>Contact Info</h3>
       <a href="tel:+77000907098">+7 700 090 7098</a>
       <a href="mailto:242409@astanait.edu.kz">242409@astanait.edu.kz</a>
-      <a href="#">Astana, Kazakhstan - 010000</a>
+      <a href="https://kazpost.indexe.info/gorod/pochtovyj-indeks-goroda-astany-po-adresu/">Astana, Kazakhstan - 010000</a>
       <img src="images/payment.png" alt="Payment methods">
     </div>
 

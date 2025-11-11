@@ -1,7 +1,13 @@
+
+
+const USERS_KEY = 'az_users';
+const CURRENT_USER_KEY = 'az_current_user';
+
 const loginBtn = document.getElementById('loginBtn');
 const registerBtn = document.getElementById('registerBtn');
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
+const loginError = document.getElementById('loginError');
 
 if (loginBtn && registerBtn && loginForm && registerForm) {
   loginBtn.addEventListener('click', () => {
@@ -9,6 +15,7 @@ if (loginBtn && registerBtn && loginForm && registerForm) {
     registerBtn.classList.remove('active');
     loginForm.classList.add('active');
     registerForm.classList.remove('active');
+    if (loginError) loginError.textContent = '';
   });
 
   registerBtn.addEventListener('click', () => {
@@ -16,52 +23,137 @@ if (loginBtn && registerBtn && loginForm && registerForm) {
     loginBtn.classList.remove('active');
     registerForm.classList.add('active');
     loginForm.classList.remove('active');
+    if (loginError) loginError.textContent = '';
   });
 }
 
-const regForm = document.getElementById('registerForm');
-const regEmail = document.getElementById('regEmail');
-const regPass = document.getElementById('regPass');
-const regConfirm = document.getElementById('regConfirm');
-const successMsg = document.getElementById('successMsg');
+const regForm   = document.getElementById('registerForm');
+const regUser   = document.getElementById('regUser');
+const regEmail  = document.getElementById('regEmail');
+const regPass   = document.getElementById('regPass');
+const regConfirm= document.getElementById('regConfirm');
+const successMsg= document.getElementById('successMsg');
+
+function loadUsers() {
+  try {
+    const raw = localStorage.getItem(USERS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+function saveUsers(list) {
+  localStorage.setItem(USERS_KEY, JSON.stringify(list));
+}
+
+function showRegError(inputEl, msg) {
+  const errBox = inputEl?.nextElementSibling;
+  if (errBox && errBox.classList.contains('error')) {
+    errBox.textContent = msg || '';
+  }
+  if (msg) {
+    inputEl.classList.add('invalid');
+  } else {
+    inputEl.classList.remove('invalid');
+  }
+}
+
 
 if (regForm) {
-  function showRegError(inputEl, msg) {
-    const errBox = inputEl?.parentElement?.querySelector('.error');
-    if (errBox) errBox.textContent = msg || '';
-    if (msg) {
-      inputEl.classList.add('invalid');
-    } else {
-      inputEl.classList.remove('invalid');
-    }
-  }
-
   regForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (successMsg) successMsg.hidden = true;
 
     let ok = true;
+    const usernameVal = (regUser?.value || '').trim();
+    const emailVal    = (regEmail?.value || '').trim();
+    const passVal     = (regPass?.value || '').trim();
+    const confirmVal  = (regConfirm?.value || '').trim();
 
-    const emailVal = (regEmail?.value || '').trim();
+
+    if (!usernameVal || usernameVal.length < 3) {
+      ok = false;
+      showRegError(regUser, 'Username must be at least 3 characters');
+    } else showRegError(regUser, '');
+
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
     if (!emailValid) {
       ok = false;
       showRegError(regEmail, 'Enter a valid email address');
     } else showRegError(regEmail, '');
-    const passVal = (regPass?.value || '').trim();
-    if (passVal.length < 6) {
+
+    const passComplex = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(passVal);
+    if (!passComplex) {
       ok = false;
-      showRegError(regPass, 'Password must be at least 6 characters');
+      showRegError(
+        regPass,
+        'Min 6 chars, must include letters and numbers'
+      );
     } else showRegError(regPass, '');
-    const confirmVal = (regConfirm?.value || '').trim();
+
     if (!confirmVal || confirmVal !== passVal) {
       ok = false;
       showRegError(regConfirm, 'Passwords do not match');
     } else showRegError(regConfirm, '');
 
+    const users = loadUsers();
+    if (users.some(u => u.username === usernameVal)) {
+      ok = false;
+      showRegError(regUser, 'This username is already taken');
+    }
+    if (users.some(u => u.email === emailVal)) {
+      ok = false;
+      showRegError(regEmail, 'This email is already registered');
+    }
+
     if (!ok) return;
+
+    users.push({
+      username: usernameVal,
+      email: emailVal,
+      password: passVal   
+    });
+    saveUsers(users);
+
     regForm.reset();
     if (successMsg) successMsg.hidden = false;
+  });
+}
+
+if (loginForm) {
+  const loginUser = document.getElementById('loginUser');
+  const loginPassEl = document.getElementById('loginPass');
+
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (loginError) loginError.textContent = '';
+
+    const loginVal = (loginUser?.value || '').trim();
+    const passVal  = (loginPassEl?.value || '').trim();
+
+    if (!loginVal || !passVal) {
+      if (loginError) loginError.textContent = 'Fill in both fields';
+      return;
+    }
+
+    const users = loadUsers();
+    const found = users.find(
+      u =>
+        (u.username === loginVal || u.email === loginVal) &&
+        u.password === passVal
+    );
+
+    if (!found) {
+      if (loginError) loginError.textContent = 'Wrong login or password';
+      return;
+    }
+
+    localStorage.setItem(
+      CURRENT_USER_KEY,
+      JSON.stringify({ username: found.username, email: found.email })
+    );
+
+    window.location.href = 'profile.html';
   });
 }
 
@@ -1146,3 +1238,81 @@ document.addEventListener('DOMContentLoaded', () => {
       item.classList.toggle('active');
     });
   });
+
+(function loadGiftReviewsFromUnsplash() {
+  const container = document.getElementById('giftReviews');
+  if (!container) return; 
+
+
+  const UNSPLASH_ACCESS_KEY = 'cyy2FNWB6kNSoKiSmdZVMRV9dGwHTb7kdAWzg3swNYM';
+
+  const query = 'gift sweets accessories';
+
+  const reviewTexts = [
+'The perfect sweet gift for a loved one 🎁',
+'Customers adore these gift sets 💕',
+'A great option if you want something cute and delicious ✨',
+'A very warm and cozy gift – just what you need for a special day 💝',
+'A stylish accessory that will definitely be remembered 🎀',
+'A delicate sweet surprise for those who appreciate care and attention 🌸'
+  ];
+
+  function getRandomReview() {
+    const index = Math.floor(Math.random() * reviewTexts.length);
+    return reviewTexts[index];
+  }
+
+  fetch(
+    `https://api.unsplash.com/search/photos?query=${encodeURIComponent(
+      query
+    )}&per_page=6&orientation=squarish&client_id=${UNSPLASH_ACCESS_KEY}`
+  )
+    .then(res => res.json())
+    .then(data => {
+      const photos = data.results || [];
+
+      if (!photos.length) {
+        container.innerHTML =
+          '<p class="text-muted text-center">Отзывы пока недоступны.</p>';
+        return;
+      }
+
+      container.innerHTML = '';
+
+      photos.forEach(photo => {
+        const col = document.createElement('div');
+        col.className = 'col-12 col-md-6 col-lg-4';
+
+        const altText =
+          photo.alt_description || 'Gift idea — sweets & accessories';
+        const author =
+          (photo.user && photo.user.name) || 'Our happy customer';
+
+        col.innerHTML = `
+          <div class="card h-100 shadow-sm">
+            <img 
+              src="${photo.urls.small}" 
+              class="card-img-top" 
+              alt="${altText}"
+              loading="lazy"
+            >
+            <div class="card-body">
+              <p class="mb-2" style="font-size:0.9rem;">
+                "${getRandomReview()}"
+              </p>
+              <p class="mb-0 text-muted" style="font-size:0.8rem;">
+                Фото вдохновения: ${author}
+              </p>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(col);
+      });
+    })
+    .catch(err => {
+      console.error('Unsplash API error:', err);
+      container.innerHTML =
+        '<p class="text-muted text-center">Отзывы временно недоступны.</p>';
+    });
+})();

@@ -10,7 +10,6 @@
   outline: none;
   border: none;
   text-decoration: none;
-  text-transform: capitalize;
   transition: 0.2s linear;
 }
 
@@ -913,4 +912,14 @@ body.dark-mode .order-container .form-check-label {
 .products .card .btn-primary:focus {
   border-color: #ff5ca8;                
   box-shadow: 0 0 0 0.15rem rgba(232, 67, 147, 0.4); 
+}
+/* === Нормальное бургер-меню в тёмной теме === */
+body.dark-mode .navbar-toggler {
+  border-color: #f1f3f5 !important;     /* светлая рамка */
+  background-color: #1f1f1f !important; /* чуть светлее фона, чтобы было видно кнопку */
+}
+
+/* сама иконка (три полоски) делаем светлой */
+body.dark-mode .navbar-toggler-icon {
+  filter: invert(1);                    /* превращаем тёмную иконку в светлую */
 }

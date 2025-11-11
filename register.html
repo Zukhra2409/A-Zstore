@@ -127,28 +127,27 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="nav">
-        <ul class="navbar-nav ms-auto align-items-center">
-  <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-  <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
-  <li class="nav-item">
-    <a class="nav-link d-flex align-items-center" href="favorites.html">
-      Favorites
-      <span id="favCount" class="badge bg-dark ms-1 rounded-pill">0</span>
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link d-flex align-items-center" href="cart.html">
-      Cart
-      <span id="cartCount" class="badge bg-dark ms-1 rounded-pill">0</span>
-    </a>
-  </li>
-
-  <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
-  <li class="nav-item"><a class="nav-link" href="register.html">Login</a></li>
-  <li class="nav-item ms-2">
-    <button id="themeBtn" class="btn btn-outline-dark btn-sm px-3">🌙 Night Mode</button>
-  </li>
-</ul>
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="product.html">Products</a></li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="favorites.html">
+            Favorites
+            <span id="favCount" class="badge bg-dark ms-1 rounded-pill">0</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="cart.html">
+            Cart
+            <span id="cartCount" class="badge bg-dark ms-1 rounded-pill">0</span>
+          </a>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="order.html">Order</a></li>
+        <li class="nav-item"><a class="nav-link" href="register.html">Login</a></li>
+        <li class="nav-item ms-2">
+          <button id="themeBtn" class="btn btn-outline-dark btn-sm px-3">🌙 Night Mode</button>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
@@ -161,8 +160,9 @@
     </div>
 
     <form class="form active" id="loginForm">
-      <input type="text" id="loginUser" placeholder="Username">
+      <input type="text" id="loginUser" placeholder="Username or Email">
       <input type="password" id="loginPass" placeholder="Password">
+      <small id="loginError" class="error"></small>
       <button type="submit">Login</button>
     </form>
 
